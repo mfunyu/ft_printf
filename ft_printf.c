@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 12:13:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/12 12:24:08 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 	if (format[i] == '%')
 	{
 		ft_putchar_fd(format[i], 1);
-		*cnt++;
+		(*cnt)++;
 	}
 	return (0);
 }

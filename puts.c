@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 12:16:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/12 12:24:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putpadding(char c, int n, int *cnt)
 	while(n > 0)
 	{
 		ft_putchar_fd(c, 1);
-		*cnt++;
+		(*cnt)++;
 		n--;
 	}
 }
@@ -27,7 +27,7 @@ int		ft_putchr(int t_int, t_flag *flag, int *cnt)
 	if (flag->justified && !flag->left_justified)
 		ft_putpadding((flag->zero_padding ? '0' : ' '), flag->digits - 1, cnt);
 	ft_putchar_fd((char)t_int, 1);
-	*cnt++;
+	(*cnt)++;
 	if (flag->left_justified)
 		ft_putpadding(' ', flag->digits - 1, cnt);
 	return (0);

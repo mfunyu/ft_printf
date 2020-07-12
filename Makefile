@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2020/07/10 20:07:01 by mfunyu           ###   ########.fr        #
+#    Updated: 2020/07/12 11:33:58 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,24 @@ CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 
 NAME := libftprintf.a
-SRCS := ft_printf.c
+SRCS := ft_printf.c ft_printf_utils.c puts.c
 OBJS := ${SRCS:%.c=%.o}
+LIBFT := ./libft
 
-all : ${NAME}
+all : ${NAME} ${LIBFT}
 
-${NAME} : ${OBJS} ${LIBFT}
-	ar rc ${OBJS}
+${NAME} : ${OBJS}
+	${MAKE} -C ${LIBFT}
+	cp ${LIBFT}/libft.a ${NAME}
+	ar rcs ${NAME} ${OBJS}
 
 clean :
-	${RM} ${NAME}
-
-fclean : clean
 	${RM} ${OBJS}
+	${MAKE} clean -C ${LIBFT}
+
+fclean :
+	${RM} ${NAME} ${OBJS}
+	${MAKE} fclean -C ${LIBFT}
 
 re : fclean all
 

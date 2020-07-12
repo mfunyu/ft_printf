@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+         #
+#    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/23 15:26:26 by mfunyu            #+#    #+#              #
-#    Updated: 2020/07/01 10:46:54 by mfunyu           ###   ########.fr        #
+#    Updated: 2020/07/10 20:50:27 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ BOBJS := $(BSRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	ar src $(NAME) $(OBJS)
 
 bonus: $(BOBJS)
 	ar rc $(NAME) $(BOBJS)

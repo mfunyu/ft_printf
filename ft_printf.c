@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 11:54:13 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/12 12:13:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_flag	*init_struct()
 	return (flag);
 }
 
-int		parse_format_str(const char *format, va_list *ap, t_flag *flag)
+int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 {
 	int		i;
 	// int		type;
@@ -45,18 +45,18 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag)
 	if (format[i] == 'c')
 	{
 		t_int = va_arg(*ap, int);
-		ft_putchr(t_int, flag);
+		ft_putchr(t_int, flag, cnt);
 	}
 	if (format[i] == 's')
 	{
 		t_str = va_arg(*ap, char *);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0);
+		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == 'p')
 	{
 		t_uint = va_arg(*ap, unsigned int);
 		t_str = itohex(t_uint, 0);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 1);
+		ft_putstr(t_str, ft_strlen(t_str), flag, 1, cnt);
 	}
 	if (format[i] == 'd' || format[i] == 'i')
 	{
@@ -64,28 +64,30 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag)
 
 		t_str = ft_itoa(va_arg(*ap, int));
 		len = (flag->precision > (int)ft_strlen(t_str) ? flag->precision : ft_strlen(t_str));
-		ft_putstr(t_str, len, flag, 0);
+		ft_putstr(t_str, len, flag, 0, cnt);
 	}
 	if (format[i] == 'u')
 	{
 		t_uint = va_arg(*ap, unsigned int);
 		ft_putnbr_fd(t_uint, 1);
+		//cntまだ
 	}
 	if (format[i] == 'x')
 	{
 		t_uint = va_arg(*ap, unsigned int);
 		t_str = itohex(t_uint, 0);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0);
+		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == 'X')
 	{
 		t_uint = va_arg(*ap, unsigned int);
 		t_str = itohex(t_uint, 1);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0);
+		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == '%')
 	{
 		ft_putchar_fd(format[i], 1);
+		*cnt++;
 	}
 	return (0);
 }
@@ -153,7 +155,7 @@ int		ft_printf(const char *str, ...)
 		if (*str == '%')
 		{
 			str = parse_flags(str + 1, &ap, flag);
-			parse_format_str(str, &ap, flag);
+			parse_format_str(str, &ap, flag, &cnt);
 			str++;
 		}
 		else

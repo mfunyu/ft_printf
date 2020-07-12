@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 11:51:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/12 12:16:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_printf(const char *format, ...);
 char	*itohex(unsigned int nb, int X);
 
 /* puts */
-int		ft_putchr(int t_int, t_flag *flag);
-int		ft_putstr(char *t_str, int len, t_flag *flag, int p);
+int		ft_putchr(int t_int, t_flag *flag, int *cnt);
+int		ft_putstr(char *t_str, int len, t_flag *flag, int p, int *cnt);
 
 #endif

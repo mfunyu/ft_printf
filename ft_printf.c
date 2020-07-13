@@ -6,13 +6,11 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 21:15:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 23:14:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <unistd.h>
 
 //cspdiuxX%
 
@@ -22,6 +20,7 @@ t_flag	*init_struct()
 
 	flag = (t_flag *)malloc(sizeof(t_flag));
 
+	flag->format = 0;
 	flag->left_justified = 0;
 	flag->justified = 0;
 	flag->right_justified = 0;
@@ -34,87 +33,19 @@ t_flag	*init_struct()
 
 int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 {
-	int		i;
-	// int		type;
-	int		t_int;
-	char	*t_str;
-	unsigned long long	t_uint;
-
-	i = 0;
-
-	if (format[i] == 'c')
-	{
-		t_int = va_arg(*ap, int);
-		ft_putchr(t_int, flag, cnt);
-	}
-	if (format[i] == 's')
-	{
-		t_str = va_arg(*ap, char *);
-		if (!t_str)
-			t_str = "(null)";
-		else if (flag->precision >= 0 && flag->precision < (int)ft_strlen(t_str))
-		{
-			t_str = ft_substr(t_str, 0, flag->precision);
-		}
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
-	}
-	if (format[i] == 'p')
-	{
-		t_uint = va_arg(*ap, unsigned int);
-		t_str = itohex(t_uint, 0);
-		ft_putstr(t_str, ft_strlen(t_str) + 2, flag, 1, cnt);
-	}
-	if (format[i] == 'd' || format[i] == 'i')
-	{
-		// int		len;
-
-		t_str = ft_itoa(va_arg(*ap, int));
-		if (!flag->precision && t_str[0] == '0')
-		{
-			t_str = ft_strdup("");
-		}
-		if (flag->precision > 0)
-			flag->zero_padding = 0;
-		// len = (flag->precision > (int)ft_strlen(t_str) ? flag->precision : ft_strlen(t_str));
-		// ft_putstr2(t_str, len, flag, cnt);
-		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
-	}
-	if (format[i] == 'u')
-	{
-		// unsigned long long	t_uintry;
-		// t_str = va_arg(*ap, char *);
-		// t_uintry = va_arg(*ap, unsigned int);
-		t_uint = va_arg(*ap, unsigned int);
-		// printf("%s", t_str);
-		// printf("%lld\n", t_uintry);
-		// printf("%llu\n", t_uint);
-		// if (t_uintry < 0)
-			// t_uintry *= -1;
-		// printf("%d\n", t_uint);
-		// t_str = ft_itoa(t_uintry);
-		t_str = ft_uitoa(t_uint);
-		// printf("s: %s\n", t_str);
-		// ft_putnbr_fd(t_uint, 1);
-		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
-		//cntまだ
-	}
-	if (format[i] == 'x')
-	{
-		t_uint = va_arg(*ap, unsigned int);
-		t_str = itohex(t_uint, 0);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
-	}
-	if (format[i] == 'X')
-	{
-		t_uint = va_arg(*ap, unsigned int);
-		t_str = itohex(t_uint, 1);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
-	}
-	if (format[i] == '%')
-	{
-		ft_putchar_fd(format[i], 1);
-		(*cnt)++;
-	}
+	flag->format = *format;
+	if (*format == 'c')
+		write_c(ap, flag, cnt);
+	else if (*format == 's')
+		write_s(ap, flag, cnt);
+	else if (*format == 'd' || *format == 'i')
+		set_di(ap, flag, cnt);
+	else if (*format == 'u')
+		set_u(ap, flag, cnt);
+	else if ((*format == 'p' || *format == 'x' || *format == 'X'))
+		set_hex(ap, flag, cnt);
+	else if (*format == '%')
+		ft_putchar_cnt('%', cnt);
 	return (0);
 }
 
@@ -122,45 +53,39 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 
 const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 {
-	int		i;
-
-	i = 0;
-	while (ft_strchr("-0.*", format[i]) || ft_isdigit(format[i]))
+	while (ft_strchr("-0.*", *format) || ft_isdigit(*format))
 	{
-		if (format[i] == '-')
-		{
-			flag->left_justified = 1;
-			flag->justified = 1;
-		}
-		else if (format[i] == '0')
+		if (*format == '-' || *format == '0')
 		{
 			flag->justified = 1;
-			flag->zero_padding = 1;
+			(*format == '-') ? (flag->left_justified = 1) : (flag->zero_padding = 1);
 		}
-		else if (format[i] == '.')
+		else if (*format == '.')
 		{
-			if (ft_isdigit(format[i + 1]))
+			if (ft_isdigit(*(format + 1)) || *(format + 1) == '*')
 			{
-				i++;
-				flag->precision = ft_atoi(format + i);
-				i += ft_strlen(ft_itoa(flag->precision)) - 1;
+				format++;
+				int tmp;
+				tmp = (ft_isdigit(*(format)) ? ft_atoi(format) : va_arg(*ap, int));
+				flag->precision = (tmp > 0 ? tmp : 0);
+				format += ft_strlen(ft_itoa(flag->precision)) - 1;
 				// flag->zero_padding = 0;
 				// flag->justified = 1;
 			}
-			else if (format[i + 1] == '*')
+			else if (*(format + 1) == '*')
 			{
 				int tmp;
-				i++;
+				format++;
 				tmp = va_arg(*ap, int);
 				if (tmp > 0)
 				{
 					flag->precision = tmp;
-					i += ft_strlen(ft_itoa(flag->precision)) - 1;
+					format += ft_strlen(ft_itoa(flag->precision)) - 1;
 					// flag->zero_padding = 0;
 				}
 			}
 		}
-		else if (format[i] == '*')
+		else if (*format == '*')
 		{
 			flag->digits = va_arg(*ap, int);
 			if (flag->digits < 0)
@@ -170,19 +95,19 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 			}
 			flag->justified = 1;
 		}
-		else if (ft_isdigit(format[i]))
+		else if (ft_isdigit(*format))
 		{
 			flag->justified = 1;
-			flag->digits = ft_atoi(format + i);
-			i += ft_strlen(ft_itoa(flag->digits)) - 1;
+			flag->digits = ft_atoi(format);
+			format += ft_strlen(ft_itoa(flag->digits)) - 1;
 		}
-		i++;
+		format++;
 	}
 	if (flag->left_justified)
 	{
 		flag->zero_padding = 0;
 	}
-	return (format + i);
+	return (format);
 }
 
 int		ft_printf(const char *str, ...)
@@ -204,9 +129,7 @@ int		ft_printf(const char *str, ...)
 		}
 		else
 		{
-			ft_putchar_fd(*str, 1);
-			str++;
-			cnt++;
+			ft_putchar_cnt(*(str++), &cnt);
 		}
 	}
 	va_end(ap);

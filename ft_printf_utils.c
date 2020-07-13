@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 22:58:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 08:30:50 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int	get_digits(unsigned int nb, unsigned int base)
+unsigned int	get_digits(unsigned int nb, unsigned int base)
 {
 	unsigned int		cnt;
 
@@ -35,9 +35,8 @@ char		*itohex(unsigned int nb, int X)
 	char			*strhex;
 	char			*hex;
 	unsigned int	digits;
-	unsigned int	ans;
 
-	hex = "abcdef";
+	hex = "0123456789abcdef";
 	digits = get_digits(nb, 16);
 	// printf("digits: %d", digits);
 	strhex = (char *)malloc((digits + 1) * sizeof(char));
@@ -46,16 +45,11 @@ char		*itohex(unsigned int nb, int X)
 		strhex[0] = '0';
 	while (nb > 0)
 	{
-		digits--;
-		ans = nb % 16;
 		// printf("%d, %d\n", digits, ans);
+		digits--;
+		strhex[digits] = (X ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
+		// printf("%c\n", strhex[digits]);
 		nb /= 16;
-		if (ans < 10)
-			strhex[digits] = ans + '0';
-		else
-		{
-			strhex[digits] = hex[ans - 10] - X * 32;
-		}
 		// printf("\nstr:%s\n", strhex);
 	}
 	return (strhex);

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 23:17:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 08:24:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 		if (*t_str == '-')
 		{
 			ft_putchar_cnt('-', cnt);
+			flag->precision++;
 			t_str++;
 		}
 		ft_putpadding('0', (flag->precision  > 0 ? flag->precision - len : flag->digits - len), cnt);

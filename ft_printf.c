@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 23:14:39 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 08:46:34 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 
 const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 {
+	int		tmp;
+
 	while (ft_strchr("-0.*", *format) || ft_isdigit(*format))
 	{
 		if (*format == '-' || *format == '0')
@@ -65,42 +67,30 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 			if (ft_isdigit(*(format + 1)) || *(format + 1) == '*')
 			{
 				format++;
-				int tmp;
 				tmp = (ft_isdigit(*(format)) ? ft_atoi(format) : va_arg(*ap, int));
-				flag->precision = (tmp > 0 ? tmp : 0);
-				format += ft_strlen(ft_itoa(flag->precision)) - 1;
+				flag->precision = (tmp >= 0 ? tmp : -1);
+				format += (ft_isdigit(*(format)) ? get_digits(flag->precision, 10) - 1 : 0);
 				// flag->zero_padding = 0;
 				// flag->justified = 1;
 			}
-			else if (*(format + 1) == '*')
-			{
-				int tmp;
-				format++;
-				tmp = va_arg(*ap, int);
-				if (tmp > 0)
-				{
-					flag->precision = tmp;
-					format += ft_strlen(ft_itoa(flag->precision)) - 1;
-					// flag->zero_padding = 0;
-				}
-			}
 		}
-		else if (*format == '*')
+		else if (ft_isdigit(*format) || *format == '*')
 		{
-			flag->digits = va_arg(*ap, int);
-			if (flag->digits < 0)
+			// flag->digits = va_arg(*ap, int);
+			flag->justified = 1;
+			tmp = (ft_isdigit(*format) ? ft_atoi(format) : va_arg(*ap, int));
+			if (tmp < 0)
 			{
-				flag->digits *= -1;
 				flag->left_justified = 1;
 			}
-			flag->justified = 1;
+			flag->digits = (tmp > 0 ? tmp : tmp * -1);
+			format += (ft_isdigit(*format) ? get_digits(flag->digits, 10) - 1 : 0 );
 		}
-		else if (ft_isdigit(*format))
-		{
-			flag->justified = 1;
-			flag->digits = ft_atoi(format);
-			format += ft_strlen(ft_itoa(flag->digits)) - 1;
-		}
+		// else if (ft_isdigit(*format))
+		// {
+		// 	flag->justified = 1;
+		// 	flag->digits = ft_atoi(format); //always positive
+		// }
 		format++;
 	}
 	if (flag->left_justified)

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 17:54:58 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 18:49:02 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,28 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 	*cnt += ft_strlen(t_str);
 	if (flag->left_justified)
 		ft_putpadding(' ', flag->digits - len, cnt);
+	return (0);
+}
+
+int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
+{
+	if (flag->justified && !flag->left_justified && !flag->zero_padding)
+	{
+		ft_putpadding(' ', (flag->precision > len ? flag->digits - flag->precision : flag->digits - len), cnt);
+	}
+	if (flag->precision || flag->zero_padding)
+	{
+		if (*t_str == '-')
+		{
+			ft_putchar_fd('-', 1);
+			(*cnt)++;
+			t_str++;
+		}
+		ft_putpadding('0', (flag->precision ? flag->precision - len : flag->digits - len), cnt);
+	}
+	ft_putstr_fd(t_str, 1);
+	*cnt += ft_strlen(t_str);
+	if (flag->left_justified)
+		ft_putpadding(' ', (flag->precision > len ? flag->digits - flag->precision : flag->digits - len), cnt);
 	return (0);
 }

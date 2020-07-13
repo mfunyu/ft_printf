@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 17:57:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 18:41:45 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 	}
 	if (format[i] == 'd' || format[i] == 'i')
 	{
-		int		len;
+		// int		len;
 
 		t_str = ft_itoa(va_arg(*ap, int));
-		len = (flag->precision > (int)ft_strlen(t_str) ? flag->precision : ft_strlen(t_str));
-		ft_putstr(t_str, len, flag, 0, cnt);
+		// len = (flag->precision > (int)ft_strlen(t_str) ? flag->precision : ft_strlen(t_str));
+		// ft_putstr2(t_str, len, flag, cnt);
+		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
 	}
 	if (format[i] == 'u')
 	{
@@ -82,7 +83,7 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 		t_str = ft_itoa(t_uintry);
 		// printf("s: %s\n", t_str);
 		// ft_putnbr_fd(t_uint, 1);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
+		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
 		//cntまだ
 	}
 	if (format[i] == 'x')
@@ -133,6 +134,18 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 				i += ft_strlen(ft_itoa(flag->precision)) - 1;
 				flag->zero_padding = 0;
 				// flag->justified = 1;
+			}
+			else if (format[i + 1] == '*')
+			{
+				int tmp;
+				i++;
+				tmp = va_arg(*ap, int);
+				if (tmp > 0)
+				{
+					flag->precision = tmp;
+					i += ft_strlen(ft_itoa(flag->precision)) - 1;
+					flag->zero_padding = 0;
+				}
 			}
 		}
 		else if (format[i] == '*')

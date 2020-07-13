@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 11:49:16 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 17:27:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,25 @@ char		*itohex(unsigned int nb, int X)
 	return (strhex);
 }
 
+// char		*ft_utoa(int n)
+// {
+// 	char		*nb;
+// 	int			len;
+
+// 	len = cnt_len(n);
+// 	nb = (char *)malloc((len + 1) * sizeof(char));
+// 	if (!nb)
+// 		return (NULL);
+// 	if (n == INT_MIN)
+// 		ft_strlcpy(nb, "-2147483648", 12);
+// 	else
+// 	{
+// 		if (n < 0)
+// 		{
+// 			n *= -1;
+// 			*nb = '-';
+// 		}
+// 		set_nb(nb, n, len);
+// 	}
+// 	return (nb);
+// }

@@ -6,20 +6,25 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 17:27:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 20:52:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	get_hexdigits(int nb)
+static unsigned int	get_digits(unsigned int nb, unsigned int base)
 {
-	int		cnt;
+	unsigned int		cnt;
 
 	cnt = 1;
-	while (nb >= 16)
+	if (nb < 0)
 	{
-		nb /= 16;
+		nb *= -1;
+		cnt++;
+	}
+	while (nb >= base)
+	{
+		nb /= base;
 		cnt++;
 	}
 	return (cnt);
@@ -33,7 +38,7 @@ char		*itohex(unsigned int nb, int X)
 	unsigned int	ans;
 
 	hex = "abcdef";
-	digits = get_hexdigits(nb);
+	digits = get_digits(nb, 16);
 	// printf("digits: %d", digits);
 	strhex = (char *)malloc((digits + 1) * sizeof(char));
 	strhex[digits] = '\0';
@@ -56,25 +61,38 @@ char		*itohex(unsigned int nb, int X)
 	return (strhex);
 }
 
-// char		*ft_utoa(int n)
-// {
-// 	char		*nb;
-// 	int			len;
+static void		set_nb(char *nb, unsigned int n, unsigned int len)
+{
+	nb[len--] = '\0';
+	if (n == 0)
+		nb[len] = '0';
+	while (n > 0)
+	{
+		nb[len--] = n % 10 + '0';
+		n /= 10;
+	}
+}
 
-// 	len = cnt_len(n);
-// 	nb = (char *)malloc((len + 1) * sizeof(char));
-// 	if (!nb)
-// 		return (NULL);
-// 	if (n == INT_MIN)
-// 		ft_strlcpy(nb, "-2147483648", 12);
-// 	else
-// 	{
-// 		if (n < 0)
-// 		{
-// 			n *= -1;
-// 			*nb = '-';
-// 		}
-// 		set_nb(nb, n, len);
-// 	}
-// 	return (nb);
-// }
+char		*ft_uitoa(unsigned int n)
+{
+	char			*nb;
+	unsigned int	len;
+
+	len = get_digits(n, 10);
+	// printf("len: %d\n", len);
+	nb = (char *)malloc((len + 1) * sizeof(char));
+	if (!nb)
+		return (NULL);
+	// if (n == U_INT_MIN)
+	// 	ft_strlcpy(nb, "-2147483648", 12);
+	// else
+	// {
+		if (n < 0)
+		{
+			n *= -1;
+			*nb = '-';
+		}
+		set_nb(nb, n, len);
+	// }
+	return (nb);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 09:48:52 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/06/30 14:53:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 19:00:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
+	if (!s || !*s)
 		return ;
 	write(fd, s, ft_strlen(s));
 }

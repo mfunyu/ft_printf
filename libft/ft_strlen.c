@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 12:02:27 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/06/30 18:01:14 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 21:05:15 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ size_t	ft_strlen(const char *str)
 	size_t len;
 
 	len = 0;
-	while (str[len])
+	if (str)
 	{
-		len++;
+		while (str[len])
+		{
+			len++;
+		}
 	}
 	return (len);
 }

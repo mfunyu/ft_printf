@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 18:41:45 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 21:15:05 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_flag	*init_struct()
 	flag->justified = 0;
 	flag->right_justified = 0;
 	flag->zero_padding = 0;
-	flag->precision = 0;
+	flag->precision = -1;
 	flag->digits = 0;
 
 	return (flag);
@@ -50,9 +50,12 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 	if (format[i] == 's')
 	{
 		t_str = va_arg(*ap, char *);
-		flag->precision = 0;
 		if (!t_str)
 			t_str = "(null)";
+		else if (flag->precision >= 0 && flag->precision < (int)ft_strlen(t_str))
+		{
+			t_str = ft_substr(t_str, 0, flag->precision);
+		}
 		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == 'p')
@@ -66,21 +69,30 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 		// int		len;
 
 		t_str = ft_itoa(va_arg(*ap, int));
+		if (!flag->precision && t_str[0] == '0')
+		{
+			t_str = ft_strdup("");
+		}
+		if (flag->precision > 0)
+			flag->zero_padding = 0;
 		// len = (flag->precision > (int)ft_strlen(t_str) ? flag->precision : ft_strlen(t_str));
 		// ft_putstr2(t_str, len, flag, cnt);
 		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
 	}
 	if (format[i] == 'u')
 	{
-		unsigned long long	t_uintry;
+		// unsigned long long	t_uintry;
 		// t_str = va_arg(*ap, char *);
-		t_uintry = va_arg(*ap, unsigned long long);
+		// t_uintry = va_arg(*ap, unsigned int);
+		t_uint = va_arg(*ap, unsigned int);
 		// printf("%s", t_str);
-		printf("%lld\n", t_uintry);
-		if (t_uintry < 0)
-			t_uintry *= -1;
+		// printf("%lld\n", t_uintry);
+		// printf("%llu\n", t_uint);
+		// if (t_uintry < 0)
+			// t_uintry *= -1;
 		// printf("%d\n", t_uint);
-		t_str = ft_itoa(t_uintry);
+		// t_str = ft_itoa(t_uintry);
+		t_str = ft_uitoa(t_uint);
 		// printf("s: %s\n", t_str);
 		// ft_putnbr_fd(t_uint, 1);
 		ft_putstr2(t_str, ft_strlen(t_str), flag, cnt);
@@ -132,7 +144,7 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 				i++;
 				flag->precision = ft_atoi(format + i);
 				i += ft_strlen(ft_itoa(flag->precision)) - 1;
-				flag->zero_padding = 0;
+				// flag->zero_padding = 0;
 				// flag->justified = 1;
 			}
 			else if (format[i + 1] == '*')
@@ -144,7 +156,7 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 				{
 					flag->precision = tmp;
 					i += ft_strlen(ft_itoa(flag->precision)) - 1;
-					flag->zero_padding = 0;
+					// flag->zero_padding = 0;
 				}
 			}
 		}

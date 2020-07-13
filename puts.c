@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 18:49:02 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 20:26:26 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 		ft_putstr_fd("0x", 1);
 		*cnt += 2;
 	}
-	if (flag->precision)
-	{
-		ft_putpadding('0', flag->precision - ft_strlen(t_str), cnt);
-	}
 	ft_putstr_fd(t_str, 1);
 	*cnt += ft_strlen(t_str);
 	if (flag->left_justified)
@@ -59,7 +55,7 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 	{
 		ft_putpadding(' ', (flag->precision > len ? flag->digits - flag->precision : flag->digits - len), cnt);
 	}
-	if (flag->precision || flag->zero_padding)
+	if (flag->precision > 0 || flag->zero_padding)
 	{
 		if (*t_str == '-')
 		{
@@ -67,7 +63,7 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 			(*cnt)++;
 			t_str++;
 		}
-		ft_putpadding('0', (flag->precision ? flag->precision - len : flag->digits - len), cnt);
+		ft_putpadding('0', (flag->precision  > 0 ? flag->precision - len : flag->digits - len), cnt);
 	}
 	ft_putstr_fd(t_str, 1);
 	*cnt += ft_strlen(t_str);

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 17:49:44 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 17:57:05 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 	{
 		t_str = va_arg(*ap, char *);
 		flag->precision = 0;
+		if (!t_str)
+			t_str = "(null)";
 		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == 'p')
 	{
 		t_uint = va_arg(*ap, unsigned int);
 		t_str = itohex(t_uint, 0);
-		ft_putstr(t_str, ft_strlen(t_str), flag, 1, cnt);
+		ft_putstr(t_str, ft_strlen(t_str) + 2, flag, 1, cnt);
 	}
 	if (format[i] == 'd' || format[i] == 'i')
 	{

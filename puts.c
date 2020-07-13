@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/12 12:24:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 17:49:01 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 	{
 		ft_putstr_fd("0x", 1);
 		*cnt += 2;
+	}
+	if (flag->precision)
+	{
+		ft_putpadding('0', flag->precision - ft_strlen(t_str), cnt);
 	}
 	ft_putstr_fd(t_str, 1);
 	*cnt += ft_strlen(t_str);

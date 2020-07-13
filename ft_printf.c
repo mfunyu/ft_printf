@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/13 17:29:27 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/13 17:49:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 	if (format[i] == 's')
 	{
 		t_str = va_arg(*ap, char *);
+		flag->precision = 0;
 		ft_putstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	}
 	if (format[i] == 'p')
@@ -129,6 +130,7 @@ const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
 				flag->precision = ft_atoi(format + i);
 				i += ft_strlen(ft_itoa(flag->precision)) - 1;
 				flag->zero_padding = 0;
+				// flag->justified = 1;
 			}
 		}
 		else if (format[i] == '*')

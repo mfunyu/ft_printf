@@ -6,16 +6,29 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 22:51:37 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 23:18:17 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+size_t	get_udigits(size_t n, size_t base)
+{
+	size_t		cnt;
+
+	cnt = 1;
+	while (n >= base)
+	{
+		n /= base;
+		cnt++;
+	}
+	return (cnt);
+}
+
 unsigned int	get_digits(long long nb, unsigned int base)
 {
-	unsigned int		cnt;
-	unsigned int		n;
+	size_t		cnt;
+	size_t		n;
 
 	cnt = 1;
 	if (nb < 0)
@@ -42,7 +55,7 @@ char		*itohex(size_t nb, int X)
 	size_t	digits;
 
 	hex = "0123456789abcdef";
-	digits = get_digits(nb, 16);
+	digits = get_udigits(nb, 16);
 	// printf("digits: %d", digits);
 	strhex = (char *)malloc((digits + 1) * sizeof(char));
 	strhex[digits] = '\0';

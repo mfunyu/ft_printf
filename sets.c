@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 17:56:02 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 18:41:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void		set_precision(const char **format, va_list *ap, t_flag *flag)
 	int		tmp;
 
 	flag->precision = 0;
-	if (*(*format + 1) == '-')
-		flag->precision = -1; //初期化更新
+	// if (*(*format + 1) == '-')
+	// 	flag->precision = 0; //初期化更新
 	if (*(*format + 1) == '*')
 	{
 		(*format)++;

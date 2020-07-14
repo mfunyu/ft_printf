@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 14:58:19 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 16:03:08 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int		parse_format_str(const char *format, va_list *ap,\
 		set_hex(ap, flag, cnt);
 	else if (*format == '%')
 		ft_putchar_cnt('%', cnt);
-	else
-		return (-1);
 	return (0);
 }
 
@@ -72,7 +70,7 @@ int		parse_format_str(const char *format, va_list *ap,\
 int		parse_format_specifiers(const char **format,\
 						va_list *ap, t_flag *flag, int *cnt)
 {
-	while (**format && (ft_strchr("-0.*", **format) || ft_isdigit(**format)))
+	while (*format && (ft_strchr("-0.*", **format) || ft_isdigit(**format)))
 	{
 		if (**format == '-')
 		{

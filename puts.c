@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 12:58:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 15:59:29 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,19 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
 		ft_putpadding(' ', flag->min_width - len, cnt);
-	// printf("zero : %d\n", flag->zero_padding);
-	// printf("left : %d\n", flag->left_justified);
-	// printf("min : %d\n\n", flag->min_width);
 	return (0);
 }
 
+/*
+** [     -000007] instead of [     00000-7]
+*/
+
 int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 {
+	// printf("zero : %d\n", flag->zero_padding);
+	// printf("left : %d\n", flag->left_justified);
+	// printf("min : %d\n\n", flag->min_width);
+	// printf("min : %d\n\n", flag->precision);
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
 		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
@@ -70,7 +75,6 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 		if (*t_str == '-')
 		{
 			ft_putchar_cnt('-', cnt);
-			flag->precision++;
 			t_str++;
 		}
 		ft_putpadding('0', (flag->precision  > 0 ? flag->precision - len : flag->min_width - len), cnt);
@@ -78,6 +82,10 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt)
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
 		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
+	// printf("zero : %d\n", flag->zero_padding);
+	// printf("left : %d\n", flag->left_justified);
+	// printf("min : %d\n\n", flag->min_width);
+	// printf("min : %d\n\n", flag->precision);
 	return (0);
 }
 

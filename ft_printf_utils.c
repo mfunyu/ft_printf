@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 20:35:15 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 22:48:54 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned int	get_digits(long long nb, unsigned int base)
 	return (cnt);
 }
 
-char		*itohex(unsigned long nb, int X)
+char		*itohex(size_t nb, int X)
 {
 	char			*strhex;
 	char			*hex;

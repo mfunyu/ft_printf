@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 21:49:16 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 22:49:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,9 @@ int		set_p(va_list *ap, t_flag *flag, int *cnt)
 	char 			*tmp;
 
 	t_void = va_arg(*ap, void *);
-	if (!(t_str = itohex((unsigned int)t_void, (flag->format == 'X' ? 1 : 0))))
+	// printf("%d", t_void);
+		// printf("c : %c\n", (char)t_void);
+	if (!(t_str = itohex((size_t)t_void, (flag->format == 'X' ? 1 : 0))))
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')
 	{

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 21:48:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 22:49:12 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt);
 ** utils
 */
 
-char	*itohex(unsigned long nb, int X);
+char	*itohex(size_t nb, int X);
 char		*ft_uitoa(unsigned int n);
 unsigned int	get_digits(long long nb, unsigned int base);
 char		*ft_itoa2(int n);

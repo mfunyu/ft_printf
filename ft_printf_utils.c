@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 22:48:54 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 22:51:37 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		*itohex(size_t nb, int X)
 {
 	char			*strhex;
 	char			*hex;
-	unsigned int	digits;
+	size_t	digits;
 
 	hex = "0123456789abcdef";
 	digits = get_digits(nb, 16);

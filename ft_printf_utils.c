@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 15:37:24 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 16:25:53 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char		*ft_uitoa(unsigned int n)
 	unsigned int	len;
 
 	len = get_digits(n, 10);
-	// printf("len: %d\n", len);
 	nb = (char *)malloc((len + 1) * sizeof(char));
 	if (!nb)
 		return (NULL);
@@ -86,11 +85,11 @@ char		*ft_uitoa(unsigned int n)
 	// 	ft_strlcpy(nb, "-2147483648", 12);
 	// else
 	// {
-		if (n < 0)
-		{
-			n *= -1;
-			*nb = '-';
-		}
+	// 	if (n < 0)
+	// 	{
+	// 		n *= -1;
+	// 		*nb = '-';
+	// 	}
 		set_nb(nb, n, len);
 	// }
 	return (nb);
@@ -116,7 +115,6 @@ char		*ft_itoa2(int n)
 		}
 		set_nb(nb, n, len);
 	}
-	// printf("LEN: %d\n", len);
 	return (nb);
 }
 

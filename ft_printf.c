@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 16:03:08 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 16:33:33 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,23 @@ t_flag	*init_struct(void)
 int		parse_format_str(const char *format, va_list *ap,\
 										t_flag *flag, int *cnt)
 {
+	int		error;
+
+	error = 0;
 	flag->format = *format;
 	if (*format == 'c')
-		write_c(ap, flag, cnt);
+		put_c(ap, flag, cnt);
 	else if (*format == 's')
-		write_s(ap, flag, cnt);
+		error = set_s(ap, flag, cnt);
 	else if (*format == 'd' || *format == 'i')
-		set_di(ap, flag, cnt);
+		error = set_di(ap, flag, cnt);
 	else if (*format == 'u')
-		set_u(ap, flag, cnt);
+		error = set_u(ap, flag, cnt);
 	else if ((*format == 'p' || *format == 'x' || *format == 'X'))
-		set_hex(ap, flag, cnt);
+		error = set_hex(ap, flag, cnt);
 	else if (*format == '%')
 		ft_putchar_cnt('%', cnt);
-	return (0);
+	return (error);
 }
 
 /*

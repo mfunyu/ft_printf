@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 20:35:57 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 21:48:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	put_c(va_list *ap, t_flag *flag, int *cnt);
 int			set_s(va_list *ap, t_flag *flag, int *cnt);
 int			set_di(va_list *ap, t_flag *flag, int *cnt);
 int			set_u(va_list *ap, t_flag *flag, int *cnt);
+int		set_p(va_list *ap, t_flag *flag, int *cnt);
 int			set_hex(va_list *ap, t_flag *flag, int *cnt);
 void		set_precision(const char **str, va_list *ap, t_flag *flag);
 void		set_min_width(const char **str,va_list *ap, t_flag *flag);

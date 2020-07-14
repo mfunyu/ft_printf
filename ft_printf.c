@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 20:16:57 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 21:48:11 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ int		parse_format_str(const char *format, va_list *ap,\
 		error = set_di(ap, flag, cnt);
 	else if (*format == 'u')
 		error = set_u(ap, flag, cnt);
-	else if ((*format == 'p' || *format == 'x' || *format == 'X'))
+	else if (*format == 'p')
+		error = set_p(ap, flag, cnt);
+	else if (*format == 'x' || *format == 'X')
 		error = set_hex(ap, flag, cnt);
 	else if (*format == '%')
 		ft_putstr("%", 1, flag, cnt);

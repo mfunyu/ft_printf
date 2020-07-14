@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 19:46:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 21:03:00 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		set_di(va_list *ap, t_flag *flag, int *cnt)
 			return (-1);
 		free(tmp);
 	}
-	if (flag->precision > 0)
+	if (flag->precision >= 0)
 	{
 		flag->zero_padding = 0;
 		if (*t_str == '-')
@@ -73,11 +73,40 @@ int		set_u(va_list *ap, t_flag *flag, int *cnt)
 			return (-1);
 		free(tmp);
 	}
-	if (flag->precision > 0)
+	if (flag->precision >= 0)
 	{
 		flag->zero_padding = 0;
 	}
 	ft_putnumstr(t_str, ft_strlen(t_str), flag, 0, cnt);
+	free(t_str);
+	return (0);
+}
+
+int		set_p(va_list *ap, t_flag *flag, int *cnt)
+{
+	unsigned long t_uint;
+	char			*t_str;
+	char 			*tmp;
+
+	t_uint = va_arg(*ap, unsigned long);
+	if (!(t_str = itohex(t_uint, (flag->format == 'X' ? 1 : 0))))
+		return (-1);
+	if (!flag->precision && t_str[0] == '0')
+	{
+		tmp = t_str;
+		if (!(t_str = ft_strdup("")))
+			return (-1);
+		free(tmp);
+	}
+	if (flag->precision >= 0)
+	{
+		flag->zero_padding = 0;
+	}
+	// printf("tstr: %s\n", t_str);
+	ft_putnumstr2(t_str, (flag->format == 'p' ? ft_strlen(t_str) + 2 : ft_strlen(t_str)),\
+									flag, (flag->format == 'p' ? 1 : 0) , cnt);
+	// ft_putnumstr2(t_str, ft_strlen(t_str),
+									// flag, (flag->format == 'p' ? 1 : 0) , cnt);
 	free(t_str);
 	return (0);
 }
@@ -98,7 +127,7 @@ int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 			return (-1);
 		free(tmp);
 	}
-	if (flag->precision > 0)
+	if (flag->precision >= 0)
 	{
 		flag->zero_padding = 0;
 	}

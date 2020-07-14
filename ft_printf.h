@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 08:30:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 12:48:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ typedef struct	s_flag
 {
 	char		format;
 	int			left_justified;
-	int			right_justified;
-	int			justified;
-	int			precision;
 	int			zero_padding;
-	int			digits;
+	int			min_width;
+	int			precision;
 
 }				t_flag;
 
@@ -46,5 +44,6 @@ void		write_s(va_list *ap, t_flag *flag, int *cnt);
 void		set_di(va_list *ap, t_flag *flag, int *cnt);
 void		set_u(va_list *ap, t_flag *flag, int *cnt);
 void		set_hex(va_list *ap, t_flag *flag, int *cnt);
-
+void		set_precision(const char **str, va_list *ap, t_flag *flag);
+void		set_min_width(const char **str,va_list *ap, t_flag *flag);
 #endif

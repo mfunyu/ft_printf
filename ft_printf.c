@@ -6,32 +6,40 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 08:46:34 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 12:49:01 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//cspdiuxX%
-
-t_flag	*init_struct()
+t_flag	*init_struct(void)
 {
 	t_flag	*flag;
 
 	flag = (t_flag *)malloc(sizeof(t_flag));
-
 	flag->format = 0;
 	flag->left_justified = 0;
-	flag->justified = 0;
-	flag->right_justified = 0;
 	flag->zero_padding = 0;
+	flag->min_width = 0;
 	flag->precision = -1;
-	flag->digits = 0;
-
 	return (flag);
 }
 
-int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
+/*
+** format strings to be managed : cspdiuxX%
+**
+** c		Character	a
+** s		String of characters	sample
+** p		Pointer address	b8000000
+** d or i	Signed decimal integer	392
+** u		Unsigned decimal integer	7235
+** x		Unsigned hexadecimal integer	7fa
+** X		Unsigned hexadecimal integer (uppercase)	7FA
+** %		A % followed by another % character will write a single % to the stream.	%
+*/
+
+int		parse_format_str(const char *format, va_list *ap,\
+										t_flag *flag, int *cnt)
 {
 	flag->format = *format;
 	if (*format == 'c')
@@ -46,59 +54,62 @@ int		parse_format_str(const char *format, va_list *ap, t_flag *flag, int *cnt)
 		set_hex(ap, flag, cnt);
 	else if (*format == '%')
 		ft_putchar_cnt('%', cnt);
+	else
+		return (-1);
 	return (0);
 }
 
-/* flags to be managed : "-0.*" */
+/*
+** flags to be managed : "-0.*"
+** 1. parsing flag, width, and precision
+** 2. parsing format strings : cspdiuxX%
+**
+** - : Left-justify within the given field width; Right justification is the default (see width sub-specifier).
+** 0 : Left-pads the number with zeroes (0) instead of spaces when padding is specified (see width sub-specifier).
+*/
 
-const char	*parse_flags(const char *format, va_list *ap, t_flag *flag)
+
+int		parse_format_specifiers(const char **format,\
+						va_list *ap, t_flag *flag, int *cnt)
 {
-	int		tmp;
-
-	while (ft_strchr("-0.*", *format) || ft_isdigit(*format))
+	while (ft_strchr("-0.*", **format) || ft_isdigit(**format))
 	{
-		if (*format == '-' || *format == '0')
+		if (**format == '-')
 		{
-			flag->justified = 1;
-			(*format == '-') ? (flag->left_justified = 1) : (flag->zero_padding = 1);
+			flag->left_justified = 1;
 		}
-		else if (*format == '.')
+		if (**format == '0')
 		{
-			if (ft_isdigit(*(format + 1)) || *(format + 1) == '*')
-			{
-				format++;
-				tmp = (ft_isdigit(*(format)) ? ft_atoi(format) : va_arg(*ap, int));
-				flag->precision = (tmp >= 0 ? tmp : -1);
-				format += (ft_isdigit(*(format)) ? get_digits(flag->precision, 10) - 1 : 0);
-				// flag->zero_padding = 0;
-				// flag->justified = 1;
-			}
+			flag->zero_padding = 1;
 		}
-		else if (ft_isdigit(*format) || *format == '*')
+		else if (ft_isdigit(**format) || **format == '*')
 		{
-			// flag->digits = va_arg(*ap, int);
-			flag->justified = 1;
-			tmp = (ft_isdigit(*format) ? ft_atoi(format) : va_arg(*ap, int));
-			if (tmp < 0)
-			{
-				flag->left_justified = 1;
-			}
-			flag->digits = (tmp > 0 ? tmp : tmp * -1);
-			format += (ft_isdigit(*format) ? get_digits(flag->digits, 10) - 1 : 0 );
+			set_min_width(format, ap, flag);
 		}
-		// else if (ft_isdigit(*format))
-		// {
-		// 	flag->justified = 1;
-		// 	flag->digits = ft_atoi(format); //always positive
-		// }
-		format++;
+		else if (**format == '.')
+		{
+			set_precision(format, ap, flag);
+		}
+		(*format)++;
 	}
-	if (flag->left_justified)
-	{
-		flag->zero_padding = 0;
-	}
-	return (format);
+	flag->zero_padding = (flag->left_justified ? 0 : flag->zero_padding);
+	if (parse_format_str((*format)++, ap, flag, cnt))
+		return (-1);
+	return (0);
 }
+
+
+/*
+** [printf return value]
+**
+** On success, the "total number of characters written (cnt)" is returned.
+** If a writing error occurs, the error indicator (ferror) is set and "a negative number (-1)" is returned.
+**
+** [printf format]
+**
+** A format specifier follows this prototype: [see compatibility note below]
+** %[flags][width][.precision][length]specifier
+*/
 
 int		ft_printf(const char *str, ...)
 {
@@ -113,13 +124,14 @@ int		ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			str = parse_flags(str + 1, &ap, flag);
-			parse_format_str(str, &ap, flag, &cnt);
 			str++;
+			if (parse_format_specifiers(&str, &ap, flag, &cnt))
+				return (-1);
 		}
 		else
 		{
-			ft_putchar_cnt(*(str++), &cnt);
+			ft_putchar_cnt(*str, &cnt);
+			str++;
 		}
 	}
 	va_end(ap);

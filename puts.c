@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 19:24:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 19:30:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt)
 	// printf("min : %d\n\n", flag->precision);
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
-		if (p)
-			len += 2;
 		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
 	}
 	if (p)

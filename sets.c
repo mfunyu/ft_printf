@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 19:32:50 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 19:46:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int		set_u(va_list *ap, t_flag *flag, int *cnt)
 		if (!(t_str = ft_strdup("")))
 			return (-1);
 		free(tmp);
+	}
+	if (flag->precision > 0)
+	{
+		flag->zero_padding = 0;
 	}
 	ft_putnumstr(t_str, ft_strlen(t_str), flag, 0, cnt);
 	free(t_str);

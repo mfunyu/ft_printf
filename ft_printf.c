@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 19:44:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 19:54:35 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		parse_format_str(const char *format, va_list *ap,\
 	int		error;
 
 	error = 0;
+	// if (!format)
+	// 	return (-1);
 	flag->format = *format;
 	if (*format == 'c')
 		put_c(ap, flag, cnt);
@@ -100,7 +102,7 @@ int		parse_format_specifiers(const char **format,\
 		(*format)++;
 	}
 	flag->zero_padding = (flag->left_justified ? 0 : flag->zero_padding);
-	if (parse_format_str((*format)++, ap, flag, cnt))
+	if (!format || parse_format_str((*format)++, ap, flag, cnt))
 		return (-1);
 	return (0);
 }

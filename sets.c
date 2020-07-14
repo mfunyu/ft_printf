@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:19:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 23:32:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ int		set_p(va_list *ap, t_flag *flag, int *cnt)
 		flag->zero_padding = 0;
 	}
 	// printf("tstr: %s\n", t_str);
-	ft_putnumstr2(t_str, (flag->format == 'p' ? ft_strlen(t_str) + 2 : ft_strlen(t_str)),\
+	// ft_putnumstr2(t_str, (flag->format == 'p' ? ft_strlen(t_str) + 2 : ft_strlen(t_str)),\
+	// 								flag, (flag->format == 'p' ? 1 : 0) , cnt);
+	ft_putnumstr2(t_str, ft_strlen(t_str),
 									flag, (flag->format == 'p' ? 1 : 0) , cnt);
-	// ft_putnumstr2(t_str, ft_strlen(t_str),
-									// flag, (flag->format == 'p' ? 1 : 0) , cnt);
 	free(t_str);
 	return (0);
 }

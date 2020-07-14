@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 21:11:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 23:41:03 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,22 @@ int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt)
 	// printf("min : %d\n\n", flag->precision);
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
-		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
+		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
+		ft_putpadding(' ', (p ? tmp - 2 : tmp), cnt);
 	}
 	if (p)
 		ft_putstr_cnt("0x", cnt);
 	if (flag->precision > 0 || flag->zero_padding)
 	{
-		tmp = (p ? len - 2 : len);
-		ft_putpadding('0', (flag->precision  > 0 ? flag->precision - tmp : flag->min_width - tmp), cnt);
+		tmp = (p ? len + 2 : len);
+		ft_putpadding('0', (flag->precision > 0 ? flag->precision - len : flag->min_width - tmp), cnt);
 	}
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
-		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
+	{
+		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
+		ft_putpadding(' ', (p ? tmp - 2 : tmp), cnt);
+	}
 	// printf("zero : %d\n", flag->zero_padding);
 	// printf("left : %d\n", flag->left_justified);
 	// printf("min : %d\n", flag->min_width);

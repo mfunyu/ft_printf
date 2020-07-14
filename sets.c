@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 19:32:20 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 19:32:50 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		set_s(va_list *ap, t_flag *flag, int *cnt)
 	need_free = 0;
 	t_str = va_arg(*ap, char *);
 	t_str = (!t_str ? "(null)" : t_str);
-	else if (0 <= flag->precision && flag->precision < (int)ft_strlen(t_str))
+	if (0 <= flag->precision && flag->precision < (int)ft_strlen(t_str))
 	{
 		need_free = 1;
 		if (!(t_str = ft_substr(t_str, 0, flag->precision)))

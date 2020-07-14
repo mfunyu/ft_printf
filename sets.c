@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 18:41:36 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 19:25:35 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 		if (!(t_str = ft_strdup("")))
 			return (-1);
 		free(tmp);
+	}
+	if (flag->precision > 0)
+	{
+		flag->zero_padding = 0;
 	}
 	// printf("tstr: %s\n", t_str);
 	// ft_putnumstr2(t_str, (flag->format == 'p' ? ft_strlen(t_str) + 2 : ft_strlen(t_str)),\

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 12:48:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 15:35:20 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		ft_putstr2(char *t_str, int len, t_flag *flag, int *cnt);
 char		*ft_uitoa(unsigned int n);
 void	ft_putstr_cnt(char *s, int *cnt);
 void	ft_putchar_cnt(char c, int *cnt);
-unsigned int	get_digits(unsigned int nb, unsigned int base);
+unsigned int	get_digits(long long nb, unsigned int base);
+char		*ft_itoa2(int n);
 
 void		write_c(va_list *ap, t_flag *flag, int *cnt);
 void		write_s(va_list *ap, t_flag *flag, int *cnt);

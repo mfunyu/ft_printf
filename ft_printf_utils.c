@@ -6,25 +6,30 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 08:30:50 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 15:37:24 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int	get_digits(unsigned int nb, unsigned int base)
+unsigned int	get_digits(long long nb, unsigned int base)
 {
 	unsigned int		cnt;
+	unsigned int		n;
 
 	cnt = 1;
 	if (nb < 0)
 	{
-		nb *= -1;
+		n = nb * -1;
 		cnt++;
 	}
-	while (nb >= base)
+	else
 	{
-		nb /= base;
+		n = nb;
+	}
+	while (n >= base)
+	{
+		n /= base;
 		cnt++;
 	}
 	return (cnt);
@@ -58,13 +63,13 @@ char		*itohex(unsigned int nb, int X)
 static void		set_nb(char *nb, unsigned int n, unsigned int len)
 {
 	nb[len--] = '\0';
-	if (n == 0)
-		nb[len] = '0';
-	while (n > 0)
+	while (n > 9)
 	{
-		nb[len--] = n % 10 + '0';
+		nb[len] = n % 10 + '0';
 		n /= 10;
+		len--;
 	}
+	nb[len] = n + '0';
 }
 
 char		*ft_uitoa(unsigned int n)
@@ -91,4 +96,27 @@ char		*ft_uitoa(unsigned int n)
 	return (nb);
 }
 
+char		*ft_itoa2(int n)
+{
+	char		*nb;
+	int			len;
+
+	len = get_digits(n, 10);
+	nb = (char *)malloc((len + 1) * sizeof(char));
+	if (!nb)
+		return (NULL);
+	if (n == INT_MIN)
+		ft_strlcpy(nb, "-2147483648", 12);
+	else
+	{
+		if (n < 0)
+		{
+			n *= -1;
+			*nb = '-';
+		}
+		set_nb(nb, n, len);
+	}
+	// printf("LEN: %d\n", len);
+	return (nb);
+}
 

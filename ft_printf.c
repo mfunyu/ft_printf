@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 21:48:11 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 23:46:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ int		ft_printf(const char *str, ...)
 
 	cnt = 0;
 	va_start(ap, str);
-	flag = init_struct();
 	while (*str)
 	{
+		flag = init_struct();
 		if (*str == '%')
 		{
 			str++;

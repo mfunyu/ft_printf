@@ -6,13 +6,13 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:18:17 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:51:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	get_udigits(size_t n, size_t base)
+static size_t	get_udigits(size_t n, size_t base)
 {
 	size_t		cnt;
 
@@ -48,28 +48,23 @@ unsigned int	get_digits(long long nb, unsigned int base)
 	return (cnt);
 }
 
-char		*itohex(size_t nb, int X)
+char		*ft_utohex(size_t nb, int X)
 {
-	char			*strhex;
-	char			*hex;
-	size_t	digits;
+	size_t		digits;
+	char		*strhex;
+	char		*hex;
 
 	hex = "0123456789abcdef";
 	digits = get_udigits(nb, 16);
-	// printf("digits: %d", digits);
 	strhex = (char *)malloc((digits + 1) * sizeof(char));
 	strhex[digits] = '\0';
-	if (nb == 0)
-		strhex[0] = '0';
-	while (nb > 0)
+	while (nb > 15)
 	{
-		// printf("%d, %d\n", digits, ans);
 		digits--;
 		strhex[digits] = (X ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
-		// printf("%c\n", strhex[digits]);
 		nb /= 16;
-		// printf("\nstr:%s\n", strhex);
 	}
+	strhex[0] = hex[nb];
 	return (strhex);
 }
 

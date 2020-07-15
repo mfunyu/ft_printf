@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 22:49:12 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:48:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int		ft_printf(const char *format, ...);
 */
 
 void	ft_putchar_cnt(char c, int *cnt);
-void	ft_putstr_cnt(char *s, int *cnt);
 int		ft_putstr(char *t_str, int len, t_flag *flag, int *cnt);
-int		ft_putnumstr(char *t_str, int len, t_flag *flag, int p, int *cnt);
+int		ft_putnumstr(char *t_str, int len, t_flag *flag, int *cnt);
+int		ft_puthexstr(char *t_str, int len, t_flag *flag, int p, int *cnt);
 void	put_c(va_list *ap, t_flag *flag, int *cnt);
 
 /*
@@ -50,14 +50,13 @@ int		set_p(va_list *ap, t_flag *flag, int *cnt);
 int			set_hex(va_list *ap, t_flag *flag, int *cnt);
 void		set_precision(const char **str, va_list *ap, t_flag *flag);
 void		set_min_width(const char **str,va_list *ap, t_flag *flag);
-int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt);
 /*
 ** utils
 */
 
-char	*itohex(size_t nb, int X);
-char		*ft_uitoa(unsigned int n);
+char			*ft_utohex(size_t nb, int X);
+char			*ft_uitoa(unsigned int n);
 unsigned int	get_digits(long long nb, unsigned int base);
-char		*ft_itoa2(int n);
+char			*ft_itoa2(int n);
 
 #endif

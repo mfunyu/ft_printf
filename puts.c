@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:12:37 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:40:15 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putchar_cnt(char c, int *cnt)
 	(*cnt)++;
 }
 
-void	ft_putstr_cnt(char *s, int *cnt)
+static void	ft_putstr_cnt(char *s, int *cnt)
 {
 	if (!s)
 		return ;
@@ -47,11 +47,11 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 ** [     -000007] instead of [     00000-7]
 */
 
-int		ft_putnumstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
+int		ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 {
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
-		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
+		ft_putpadding(' ', (flag->precision > strlen ? flag->min_width - flag->precision : flag->min_width - strlen), cnt);
 	}
 	if (flag->precision > 0 || flag->zero_padding)
 	{
@@ -60,36 +60,35 @@ int		ft_putnumstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 			ft_putchar_cnt('-', cnt);
 			t_str++;
 		}
-		ft_putpadding('0', (flag->precision  > 0 ? flag->precision - len : flag->min_width - len), cnt);
+		ft_putpadding('0', (flag->precision > 0 ? flag->precision - strlen : flag->min_width - strlen), cnt);
 	}
-	if (p)
-		ft_putstr_cnt("0x", cnt);
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
-		ft_putpadding(' ', (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len), cnt);
+		ft_putpadding(' ', (flag->precision > strlen ? flag->min_width - flag->precision : flag->min_width - strlen), cnt);
 	return (0);
 }
 
-int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt)
+int		ft_puthexstr(char *t_str, int strlen, t_flag *flag, int p, int *cnt)
 {
-	int tmp;
+	int		len;
+
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
-		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
-		ft_putpadding(' ', (p ? tmp - 2 : tmp), cnt);
+		len = (flag->precision > strlen ? flag->min_width - flag->precision : flag->min_width - strlen);
+		ft_putpadding(' ', (p ? len - 2 : len), cnt);
 	}
 	if (p)
 		ft_putstr_cnt("0x", cnt);
 	if (flag->precision > 0 || flag->zero_padding)
 	{
-		tmp = (p ? len + 2 : len);
-		ft_putpadding('0', (flag->precision > 0 ? flag->precision - len : flag->min_width - tmp), cnt);
+		len = (p ? strlen + 2 : strlen);
+		ft_putpadding('0', (flag->precision > 0 ? flag->precision - strlen : flag->min_width - len), cnt);
 	}
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
 	{
-		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
-		ft_putpadding(' ', (p ? tmp - 2 : tmp), cnt);
+		len = (flag->precision > strlen ? flag->min_width - flag->precision : flag->min_width - strlen);
+		ft_putpadding(' ', (p ? len - 2 : len), cnt);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:27:52 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:30:35 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
-# include <stdio.h>
+# include <stdarg.h>
 
 typedef struct	s_flag
 {

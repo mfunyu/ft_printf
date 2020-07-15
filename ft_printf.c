@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:21:01 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:02:33 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		init_struct(t_flag *flag)
 ** u		Unsigned decimal integer	7235
 ** x		Unsigned hexadecimal integer	7fa
 ** X		Unsigned hexadecimal integer (uppercase)	7FA
-** %		A % followed by another % character will write a single % to the stream.	%
+** % A % followed by another % character will write a single % to the stream.
 */
 
 static int		parse_format_str(const char *format, va_list *ap,\
@@ -63,10 +63,11 @@ static int		parse_format_str(const char *format, va_list *ap,\
 ** 1. parsing flag, width, and precision
 ** 2. parsing format strings : cspdiuxX%
 **
-** - : Left-justify within the given field width; Right justification is the default (see width sub-specifier).
-** 0 : Left-pads the number with zeroes (0) instead of spaces when padding is specified (see width sub-specifier).
+** - : Left-justify within the given field width;
+** Right justification is the default (see width sub-specifier).
+** 0 : Left-pads the number with zeroes (0)
+** instead of spaces when padding is specified.
 */
-
 
 static int		parse_format_specifiers(const char **format,\
 						va_list *ap, t_flag *flag, int *cnt)
@@ -101,7 +102,7 @@ static int		parse_format_specifiers(const char **format,\
 ** [printf return value]
 **
 ** On success, the "total number of characters written (cnt)" is returned.
-** If a writing error occurs, the error indicator (ferror) is set and "a negative number (-1)" is returned.
+** If a writing error occurs, "a negative number (-1)" is returned.
 **
 ** [printf format]
 **
@@ -109,7 +110,7 @@ static int		parse_format_specifiers(const char **format,\
 ** %[flags][width][.precision][length]specifier
 */
 
-int		ft_printf(const char *str, ...)
+int				ft_printf(const char *str, ...)
 {
 	va_list		ap;
 	t_flag		*flag;

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:54:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:18:05 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ unsigned int	get_digits(long long nb, unsigned int base)
 	return (cnt);
 }
 
-char		*ft_utohex(size_t nb, int X)
+char			*ft_utohex(size_t nb, int upper)
 {
 	size_t		digits;
 	char		*strhex;
@@ -63,25 +63,13 @@ char		*ft_utohex(size_t nb, int X)
 	while (nb > 0)
 	{
 		digits--;
-		strhex[digits] = (X ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
+		strhex[digits] = (upper ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
 		nb /= 16;
 	}
 	return (strhex);
 }
 
-static void		set_nb(char *nb, unsigned int n, unsigned int len)
-{
-	nb[len--] = '\0';
-	while (n > 9)
-	{
-		nb[len] = n % 10 + '0';
-		n /= 10;
-		len--;
-	}
-	nb[len] = n + '0';
-}
-
-char		*ft_uitoa(unsigned int n)
+char			*ft_uitoa(unsigned int n)
 {
 	char			*nb;
 	unsigned int	len;
@@ -90,6 +78,21 @@ char		*ft_uitoa(unsigned int n)
 	nb = (char *)malloc((len + 1) * sizeof(char));
 	if (!nb)
 		return (NULL);
-	set_nb(nb, n, len);
+	nb[len--] = '\0';
+	while (n > 9)
+	{
+		nb[len] = n % 10 + '0';
+		n /= 10;
+		len--;
+	}
+	nb[len] = n + '0';
 	return (nb);
+}
+
+
+int				max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }

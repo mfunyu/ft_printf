@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2020/07/13 22:58:48 by mfunyu           ###   ########.fr        #
+#    Updated: 2020/07/15 10:16:38 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 
 NAME := libftprintf.a
-SRCS := ft_printf.c ft_printf_utils.c puts.c sets.c
+SRCS := ft_printf.c ft_printf_utils.c puts.c puts2.c sets.c sets2.c
 OBJS := ${SRCS:%.c=%.o}
 LIBFT := ./libft
 

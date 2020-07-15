@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:56:32 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:16:04 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int		ft_printf(const char *format, ...);
 */
 
 void			ft_putchar_cnt(char c, int *cnt);
+void			ft_putstr_cnt(char *s, int *cnt);
+void			ft_putpadding(char c, int n, int *cnt);
 int				ft_putstr(char *t_str, int len, t_flag *flag, int *cnt);
 int				ft_putnumstr(char *t_str, int len, t_flag *flag, int *cnt);
-int				ft_puthexstr(char *t_str, int len, t_flag *flag, int p, int *cnt);
+int				ft_puthexstr(char *t_str, int len, t_flag *flag, int *cnt);
 void			put_c(va_list *ap, t_flag *flag, int *cnt);
 
 /*
@@ -59,5 +61,6 @@ void			set_min_width(const char **str,va_list *ap, t_flag *flag);
 unsigned int	get_digits(long long nb, unsigned int base);
 char			*ft_utohex(size_t nb, int X);
 char			*ft_uitoa(unsigned int n);
+int				max(int a, int b);
 
 #endif

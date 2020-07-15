@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:52:28 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:54:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,40 +90,6 @@ char		*ft_uitoa(unsigned int n)
 	nb = (char *)malloc((len + 1) * sizeof(char));
 	if (!nb)
 		return (NULL);
-	// if (n == U_INT_MIN)
-	// 	ft_strlcpy(nb, "-2147483648", 12);
-	// else
-	// {
-	// 	if (n < 0)
-	// 	{
-	// 		n *= -1;
-	// 		*nb = '-';
-	// 	}
-		set_nb(nb, n, len);
-	// }
+	set_nb(nb, n, len);
 	return (nb);
 }
-
-char		*ft_itoa2(int n)
-{
-	char		*nb;
-	int			len;
-
-	len = get_digits(n, 10);
-	nb = (char *)malloc((len + 1) * sizeof(char));
-	if (!nb)
-		return (NULL);
-	if (n == INT_MIN)
-		ft_strlcpy(nb, "-2147483648", 12);
-	else
-	{
-		if (n < 0)
-		{
-			n *= -1;
-			*nb = '-';
-		}
-		set_nb(nb, n, len);
-	}
-	return (nb);
-}
-

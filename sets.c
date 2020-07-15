@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:49:11 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:54:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		set_di(va_list *ap, t_flag *flag, int *cnt)
 	char			*t_str;
 	char			*tmp;
 
-	if (!(t_str = ft_itoa2(va_arg(*ap, int))))
+	if (!(t_str = ft_itoa(va_arg(*ap, int))))
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')
 	{

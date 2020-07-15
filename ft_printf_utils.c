@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:51:31 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:52:28 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ char		*ft_utohex(size_t nb, int X)
 	digits = get_udigits(nb, 16);
 	strhex = (char *)malloc((digits + 1) * sizeof(char));
 	strhex[digits] = '\0';
-	while (nb > 15)
+	if (nb == 0)
+		strhex[0] = '0';
+	while (nb > 0)
 	{
 		digits--;
 		strhex[digits] = (X ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
 		nb /= 16;
 	}
-	strhex[0] = hex[nb];
 	return (strhex);
 }
 

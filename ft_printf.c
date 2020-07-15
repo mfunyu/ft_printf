@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:59:33 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:18:20 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		init_struct(t_flag *flag)
 ** %		A % followed by another % character will write a single % to the stream.	%
 */
 
-int		parse_format_str(const char *format, va_list *ap,\
+static int		parse_format_str(const char *format, va_list *ap,\
 										t_flag *flag, int *cnt)
 {
 	int		error;
@@ -49,9 +49,9 @@ int		parse_format_str(const char *format, va_list *ap,\
 		error = set_di(ap, flag, cnt);
 	else if (*format == 'u')
 		error = set_u(ap, flag, cnt);
-	else if (*format == 'p')
-		error = set_p(ap, flag, cnt);
-	else if (*format == 'x' || *format == 'X')
+	// else if (*format == 'p')
+	// 	error = set_p(ap, flag, cnt);
+	else if (*format == 'p' || *format == 'x' || *format == 'X')
 		error = set_hex(ap, flag, cnt);
 	else if (*format == '%')
 		ft_putstr("%", 1, flag, cnt);
@@ -70,7 +70,7 @@ int		parse_format_str(const char *format, va_list *ap,\
 */
 
 
-int		parse_format_specifiers(const char **format,\
+static int		parse_format_specifiers(const char **format,\
 						va_list *ap, t_flag *flag, int *cnt)
 {
 	while (*format && (ft_strchr("-0.*", **format) || ft_isdigit(**format)))

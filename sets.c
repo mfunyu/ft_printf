@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:32:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:17:30 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ int		set_p(va_list *ap, t_flag *flag, int *cnt)
 
 int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 {
-	unsigned int t_uint;
-	char			*t_str;
-	char 			*tmp;
+	size_t		t_uint;
+	char		*t_str;
+	char 		*tmp;
 
-	t_uint = va_arg(*ap, unsigned int);
+	t_uint = (flag->format == 'p' ? (size_t)va_arg(*ap, void *) : va_arg(*ap, size_t));
 	if (!(t_str = itohex(t_uint, (flag->format == 'X' ? 1 : 0))))
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')

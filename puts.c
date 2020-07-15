@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 00:11:56 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:12:37 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_putstr_cnt(char *s, int *cnt)
 		ft_putchar_cnt(*s++, cnt);
 }
 
-void	ft_putpadding(char c, int n, int *cnt)
+static void	ft_putpadding(char c, int n, int *cnt)
 {
 	while(n-- > 0)
 		ft_putchar_cnt(c, cnt);
@@ -43,6 +43,7 @@ int		ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 }
 
 /*
+** expected output
 ** [     -000007] instead of [     00000-7]
 */
 

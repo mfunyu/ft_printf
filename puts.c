@@ -6,18 +6,18 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:13:46 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:25:46 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
+int			ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 {
 	if (flag->min_width && !flag->left_justified)
 	{
 		ft_putpadding((flag->zero_padding ? '0' : ' '),\
-			flag->min_width - len, cnt);
+								flag->min_width - len, cnt);
 	}
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
@@ -34,8 +34,7 @@ int			ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 {
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
-		ft_putpadding(' ', (flag->precision > strlen ?\
-			flag->min_width - flag->precision : flag->min_width - strlen), cnt);
+		ft_putpadding(' ', flag->min_width - max(flag->precision, strlen), cnt);
 	}
 	if (flag->precision > 0 || flag->zero_padding)
 	{
@@ -50,8 +49,7 @@ int			ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
 	{
-		ft_putpadding(' ', (flag->precision > strlen ?\
-			flag->min_width - flag->precision : flag->min_width - strlen), cnt);
+		ft_putpadding(' ', flag->min_width - max(flag->precision, strlen), cnt);
 	}
 	return (0);
 }
@@ -78,8 +76,7 @@ int			ft_puthexstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
 	{
-		len = (flag->precision > strlen ?\
-			flag->min_width - flag->precision : flag->min_width - strlen);
+		len = flag->min_width - max(flag->precision, strlen);
 		ft_putpadding(' ', (p ? len - 2 : len), cnt);
 	}
 	return (0);
@@ -87,12 +84,12 @@ int			ft_puthexstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 
 void		put_c(va_list *ap, t_flag *flag, int *cnt)
 {
-	int				t_int;
+	int		t_int;
 
 	t_int = va_arg(*ap, int);
 	if (flag->min_width && !flag->left_justified)
 	{
-		ft_putpadding((flag->zero_padding ?'0' : ' '),\
+		ft_putpadding((flag->zero_padding ? '0' : ' '),\
 								flag->min_width - 1, cnt);
 	}
 	ft_putchar_cnt((char)t_int, cnt);

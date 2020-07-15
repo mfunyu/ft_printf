@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:16:04 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:27:52 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define FT_PRINTF_H
 
 # include "libft/libft.h"
-#include <stdio.h>
-#include <stdarg.h>
+# include <stdio.h>
 
 typedef struct	s_flag
 {
@@ -27,8 +26,7 @@ typedef struct	s_flag
 
 }				t_flag;
 
-
-int		ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 
 /*
 ** puts.c
@@ -52,14 +50,14 @@ int				set_u(va_list *ap, t_flag *flag, int *cnt);
 int				set_p(va_list *ap, t_flag *flag, int *cnt);
 int				set_hex(va_list *ap, t_flag *flag, int *cnt);
 void			set_precision(const char **str, va_list *ap, t_flag *flag);
-void			set_min_width(const char **str,va_list *ap, t_flag *flag);
+void			set_min_width(const char **str, va_list *ap, t_flag *flag);
 
 /*
 ** ft_prninf_utils.c
 */
 
 unsigned int	get_digits(long long nb, unsigned int base);
-char			*ft_utohex(size_t nb, int X);
+char			*ft_utohex(size_t nb, int upper);
 char			*ft_uitoa(unsigned int n);
 int				max(int a, int b);
 

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:14:58 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:21:58 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		set_s(va_list *ap, t_flag *flag, int *cnt)
 {
-	char			*t_str;
+	char	*t_str;
 	int		need_free;
 
 	need_free = 0;
@@ -34,8 +34,8 @@ int		set_s(va_list *ap, t_flag *flag, int *cnt)
 
 int		set_di(va_list *ap, t_flag *flag, int *cnt)
 {
-	char			*t_str;
-	char			*tmp;
+	char	*t_str;
+	char	*tmp;
 
 	if (!(t_str = ft_itoa(va_arg(*ap, int))))
 		return (-1);
@@ -59,7 +59,7 @@ int		set_di(va_list *ap, t_flag *flag, int *cnt)
 
 int		set_u(va_list *ap, t_flag *flag, int *cnt)
 {
-	unsigned int t_uint;
+	unsigned int	t_uint;
 	char			*t_str;
 	char			*tmp;
 
@@ -86,9 +86,10 @@ int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 {
 	size_t		t_uint;
 	char		*t_str;
-	char 		*tmp;
+	char		*tmp;
 
-	t_uint = (flag->format == 'p' ? (size_t)va_arg(*ap, void *) : va_arg(*ap, unsigned int));
+	t_uint = (flag->format == 'p' ?\
+			(size_t)va_arg(*ap, void *) : va_arg(*ap, unsigned int));
 	if (!(t_str = ft_utohex(t_uint, (flag->format == 'X' ? 1 : 0))))
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')

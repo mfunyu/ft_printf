@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:18:05 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:24:06 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ char			*ft_uitoa(unsigned int n)
 	nb[len] = n + '0';
 	return (nb);
 }
-
 
 int				max(int a, int b)
 {

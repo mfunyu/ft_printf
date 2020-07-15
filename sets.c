@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 09:17:30 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 09:20:21 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 	char		*t_str;
 	char 		*tmp;
 
-	t_uint = (flag->format == 'p' ? (size_t)va_arg(*ap, void *) : va_arg(*ap, size_t));
+	t_uint = (flag->format == 'p' ? (size_t)va_arg(*ap, void *) : va_arg(*ap, unsigned int));
 	if (!(t_str = itohex(t_uint, (flag->format == 'X' ? 1 : 0))))
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')
@@ -134,8 +134,7 @@ int		set_hex(va_list *ap, t_flag *flag, int *cnt)
 	{
 		flag->zero_padding = 0;
 	}
-	ft_putnumstr2(t_str, (flag->format == 'p' ? ft_strlen(t_str) + 2 : ft_strlen(t_str)),\
-									flag, (flag->format == 'p' ? 1 : 0) , cnt);
+	ft_putnumstr2(t_str, ft_strlen(t_str), flag, (flag->format == 'p' ? 1 : 0) , cnt);
 	// ft_putnumstr2(t_str, ft_strlen(t_str),
 									// flag, (flag->format == 'p' ? 1 : 0) , cnt);
 	free(t_str);

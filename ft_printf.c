@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:43:19 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:53:47 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ int				ft_printf(const char *str, ...)
 		}
 		else
 		{
-			ft_putchar_cnt(*str, &cnt);
-			str++;
+			ft_putchar_cnt(*str++, &cnt);
 		}
 	}
 	free(flag);

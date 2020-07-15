@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:24:06 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:47:53 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char			*ft_utohex(size_t nb, int upper)
 
 	hex = "0123456789abcdef";
 	digits = get_udigits(nb, 16);
-	strhex = (char *)malloc((digits + 1) * sizeof(char));
+	if (!(strhex = (char *)malloc((digits + 1) * sizeof(char))))
+		return (NULL);
 	strhex[digits] = '\0';
 	if (nb == 0)
 		strhex[0] = '0';
@@ -75,8 +76,7 @@ char			*ft_uitoa(unsigned int n)
 	unsigned int	len;
 
 	len = get_digits(n, 10);
-	nb = (char *)malloc((len + 1) * sizeof(char));
-	if (!nb)
+	if (!(nb = (char *)malloc((len + 1) * sizeof(char))))
 		return (NULL);
 	nb[len--] = '\0';
 	while (n > 9)

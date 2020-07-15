@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:02:33 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 10:43:19 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int				ft_printf(const char *str, ...)
 	int			cnt;
 
 	cnt = 0;
-	flag = (t_flag *)malloc(sizeof(t_flag));
+	if (!(flag = (t_flag *)malloc(sizeof(t_flag))))
+		return (-1);
 	va_start(ap, str);
 	while (*str)
 	{

@@ -6,23 +6,19 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:46:47 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/14 23:59:33 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_flag	*init_struct(void)
+static void		init_struct(t_flag *flag)
 {
-	t_flag	*flag;
-
-	flag = (t_flag *)malloc(sizeof(t_flag));
 	flag->format = 0;
 	flag->left_justified = 0;
 	flag->zero_padding = 0;
 	flag->min_width = 0;
 	flag->precision = -1;
-	return (flag);
 }
 
 /*
@@ -44,8 +40,6 @@ int		parse_format_str(const char *format, va_list *ap,\
 	int		error;
 
 	error = 0;
-	// if (!format)
-	// 	return (-1);
 	flag->format = *format;
 	if (*format == 'c')
 		put_c(ap, flag, cnt);
@@ -91,12 +85,10 @@ int		parse_format_specifiers(const char **format,\
 		}
 		else if (ft_isdigit(**format) || **format == '*')
 		{
-			// (*format)++;
 			set_min_width(format, ap, flag);
 		}
 		else if (**format == '.')
 		{
-			// (*format)++;
 			set_precision(format, ap, flag);
 		}
 		(*format)++;
@@ -126,10 +118,11 @@ int		ft_printf(const char *str, ...)
 	int			cnt;
 
 	cnt = 0;
+	flag = (t_flag *)malloc(sizeof(t_flag));
 	va_start(ap, str);
 	while (*str)
 	{
-		flag = init_struct();
+		init_struct(flag);
 		if (*str == '%')
 		{
 			str++;
@@ -142,6 +135,7 @@ int		ft_printf(const char *str, ...)
 			str++;
 		}
 	}
+	free(flag);
 	va_end(ap);
 	return (cnt);
 }

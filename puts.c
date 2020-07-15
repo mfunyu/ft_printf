@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/14 23:41:03 by mfunyu           ###   ########.fr       */
+/*   Updated: 2020/07/15 00:11:56 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void	ft_putpadding(char c, int n, int *cnt)
 
 int		ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 {
-	// 	printf("zero : %d\n", flag->zero_padding);
-	// printf("left : %d\n", flag->left_justified);
-	// printf("min : %d\n\n", flag->min_width);
-	// printf("min : %d\n\n", flag->precision);
 	if (flag->min_width && !flag->left_justified)
 		ft_putpadding((flag->zero_padding ? '0' : ' '), flag->min_width - len, cnt);
 	ft_putstr_cnt(t_str, cnt);
@@ -76,10 +72,6 @@ int		ft_putnumstr(char *t_str, int len, t_flag *flag, int p, int *cnt)
 int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt)
 {
 	int tmp;
-	// printf("zero : %d\n", flag->zero_padding);
-	// printf("left : %d\n", flag->left_justified);
-	// printf("min : %d\n\n", flag->min_width);
-	// printf("min : %d\n\n", flag->precision);
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
 	{
 		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
@@ -98,10 +90,6 @@ int		ft_putnumstr2(char *t_str, int len, t_flag *flag, int p, int *cnt)
 		tmp = (flag->precision > len ? flag->min_width - flag->precision : flag->min_width - len);
 		ft_putpadding(' ', (p ? tmp - 2 : tmp), cnt);
 	}
-	// printf("zero : %d\n", flag->zero_padding);
-	// printf("left : %d\n", flag->left_justified);
-	// printf("min : %d\n", flag->min_width);
-	// printf("pre : %d\n", flag->precision);
 	return (0);
 }
 

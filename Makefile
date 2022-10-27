@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 18:47:18 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/10/27 19:18:35 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ all : $(NAME) $(LIBFT)
 
 $(NAME) : $(OBJS_DIR) $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	ar rcs $(NAME) $(OBJS) $(LIBFT)/libft.a
+	cp $(LIBFT)/libft.a $(NAME)
+	ar rcs $(NAME) $(OBJS)
 
 $(OBJS_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<

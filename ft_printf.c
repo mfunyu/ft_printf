@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:29:43 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:18:20 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,27 +114,23 @@ static int	parse_format_specifiers(const char **format, \
 int	ft_printf(const char *str, ...)
 {
 	va_list		ap;
-	t_flag		*flag;
+	t_flag		flag;
 	int			cnt;
 
 	cnt = 0;
-	flag = (t_flag *)malloc(sizeof(t_flag));
-	if (!flag)
-		return (-1);
 	va_start(ap, str);
 	while (*str)
 	{
-		init_struct(flag);
+		init_struct(&flag);
 		if (*str == '%')
 		{
 			str++;
-			if (parse_format_specifiers(&str, &ap, flag, &cnt))
+			if (parse_format_specifiers(&str, &ap, &flag, &cnt))
 				return (-1);
 		}
 		else
 			ft_putchar_cnt(*str++, &cnt);
 	}
-	free(flag);
 	va_end(ap);
 	return (cnt);
 }

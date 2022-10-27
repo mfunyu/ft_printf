@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:56:55 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:03:59 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,28 @@ int	ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 	return (0);
 }
 
+static void	ft_puthexstr_prefix(int strlen, t_flag *flag, int *cnt, int *p)
+{
+	int		len;
+
+	*p = 0;
+	if (flag->format == 'p')
+		*p = 1;
+	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
+	{
+		len = flag->min_width - max(flag->precision, strlen);
+		ft_putpadding(' ', (*p ? len - 2 : len), cnt);
+	}
+	if (*p)
+		ft_putstr_cnt("0x", cnt);
+}
+
 int	ft_puthexstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 {
 	int		len;
 	int		p;
 
-	p = (flag->format == 'p' ? 1 : 0);
-	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
-	{
-		len = flag->min_width - max(flag->precision, strlen);
-		ft_putpadding(' ', (p ? len - 2 : len), cnt);
-	}
-	if (p)
-		ft_putstr_cnt("0x", cnt);
+	ft_puthexstr_prefix(strlen, flag, cnt, &p);
 	if (flag->precision > 0 || flag->zero_padding)
 	{
 		len = (p ? strlen + 2 : strlen);

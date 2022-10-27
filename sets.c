@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:34:48 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:52:12 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ int	set_u(va_list *ap, t_flag *flag, int *cnt)
 	return (0);
 }
 
+static int	is_upper(char format)
+{
+	return (format == 'X');
+}
+
 int	set_hex(va_list *ap, t_flag *flag, int *cnt)
 {
 	size_t		t_uint;
@@ -98,7 +103,7 @@ int	set_hex(va_list *ap, t_flag *flag, int *cnt)
 		t_uint = (size_t)va_arg(*ap, void *);
 	else
 		t_uint = va_arg(*ap, unsigned int);
-	t_str = ft_utohex(t_uint, (flag->format == 'X' ? 1 : 0));
+	t_str = ft_utohex(t_uint, is_upper(flag->format == 'X'));
 	if (!t_str)
 		return (-1);
 	if (!flag->precision && t_str[0] == '0')

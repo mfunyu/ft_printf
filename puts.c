@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:26:35 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:56:55 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 int	ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 {
+	char	padding;
+
+	padding = ' ';
 	if (flag->min_width && !flag->left_justified)
 	{
-		ft_putpadding((flag->zero_padding ? '0' : ' '), \
-								flag->min_width - len, cnt);
+		if (flag->zero_padding)
+			padding = '0';
+		ft_putpadding(padding, flag->min_width - len, cnt);
 	}
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
-		ft_putpadding(' ', flag->min_width - len, cnt);
+		ft_putpadding(padding, flag->min_width - len, cnt);
 	return (0);
 }
 
@@ -33,9 +37,7 @@ int	ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
 int	ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 {
 	if (flag->min_width && !flag->left_justified && !flag->zero_padding)
-	{
 		ft_putpadding(' ', flag->min_width - max(flag->precision, strlen), cnt);
-	}
 	if (flag->precision > 0 || flag->zero_padding)
 	{
 		if (*t_str == '-')
@@ -43,14 +45,14 @@ int	ft_putnumstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 			ft_putchar_cnt('-', cnt);
 			t_str++;
 		}
-		ft_putpadding('0', (flag->precision > 0 ? \
-			flag->precision - strlen : flag->min_width - strlen), cnt);
+		if (flag->precision > 0)
+			ft_putpadding('0', flag->precision - strlen, cnt);
+		else
+			ft_putpadding('0', flag->min_width - strlen, cnt);
 	}
 	ft_putstr_cnt(t_str, cnt);
 	if (flag->left_justified)
-	{
 		ft_putpadding(' ', flag->min_width - max(flag->precision, strlen), cnt);
-	}
 	return (0);
 }
 
@@ -85,16 +87,19 @@ int	ft_puthexstr(char *t_str, int strlen, t_flag *flag, int *cnt)
 void	put_c(va_list *ap, t_flag *flag, int *cnt)
 {
 	int		t_int;
+	char	padding;
 
 	t_int = va_arg(*ap, int);
+	padding = ' ';
 	if (flag->min_width && !flag->left_justified)
 	{
-		ft_putpadding((flag->zero_padding ? '0' : ' '), \
-								flag->min_width - 1, cnt);
+		if (flag->zero_padding)
+			padding = '0';
+		ft_putpadding(padding, flag->min_width - 1, cnt);
 	}
 	ft_putchar_cnt((char)t_int, cnt);
 	if (flag->left_justified)
 	{
-		ft_putpadding(' ', flag->min_width - 1, cnt);
+		ft_putpadding(padding, flag->min_width - 1, cnt);
 	}
 }

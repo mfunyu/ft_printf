@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:21:10 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:36:57 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	set_precision(const char **format, va_list *ap, t_flag *flag)
 	{
 		(*format)++;
 		prec = va_arg(*ap, int);
-		flag->precision = (prec >= 0 ? prec : -1);
+		flag->precision = prec;
+		if (prec < 0)
+			flag->precision = -1;
 	}
 	else
 	{

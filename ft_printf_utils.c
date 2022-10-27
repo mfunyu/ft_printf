@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 17:25:25 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:35:31 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ char	*ft_utohex(size_t nb, int upper)
 	while (nb > 0)
 	{
 		digits--;
-		strhex[digits] = (upper ? ft_toupper(hex[nb % 16]) : hex[nb % 16]);
+		if (upper)
+			strhex[digits] = ft_toupper(hex[nb % 16]);
+		else
+			strhex[digits] = hex[nb % 16];
 		nb /= 16;
 	}
 	return (strhex);

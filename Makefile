@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 19:18:35 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/10/27 19:30:45 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,3 +51,6 @@ fclean : clean
 
 .PHONY : re
 re : fclean all
+
+.PHONY : bonus
+bonus: all

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:52:43 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:45:36 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ int				ft_printf(const char *format, ...);
 
 void			ft_putchar_cnt(char c, int *cnt);
 void			ft_putstr_cnt(char *s, int *cnt);
+void			ft_putstr_cnt_limit(char *s, int len, int *cnt);
 void			ft_putpadding(char c, int n, int *cnt);
-int				ft_putstr(char *t_str, int len, t_flag *flag, int *cnt);
 int				ft_putnumstr(char *t_str, int len, t_flag *flag, int *cnt);
 int				ft_puthexstr(char *t_str, int len, t_flag *flag, int *cnt);
 void			put_c(va_list *ap, t_flag *flag, int *cnt);
+void			put_s(va_list *ap, t_flag *flag, int *cnt);
 
 /*
 ** sets.c
 */
 
-int				set_s(va_list *ap, t_flag *flag, int *cnt);
 int				set_di(va_list *ap, t_flag *flag, int *cnt);
 int				set_u(va_list *ap, t_flag *flag, int *cnt);
 int				set_p(va_list *ap, t_flag *flag, int *cnt);

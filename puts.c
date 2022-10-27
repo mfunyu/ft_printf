@@ -6,28 +6,11 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:06:54 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:45:34 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_putstr(char *t_str, int len, t_flag *flag, int *cnt)
-{
-	char	padding;
-
-	padding = ' ';
-	if (flag->min_width && !flag->left_justified)
-	{
-		if (flag->zero_padding)
-			padding = '0';
-		ft_putpadding(padding, flag->min_width - len, cnt);
-	}
-	ft_putstr_cnt(t_str, cnt);
-	if (flag->left_justified)
-		ft_putpadding(padding, flag->min_width - len, cnt);
-	return (0);
-}
 
 /*
 ** expected output
@@ -119,4 +102,28 @@ void	put_c(va_list *ap, t_flag *flag, int *cnt)
 	{
 		ft_putpadding(padding, flag->min_width - 1, cnt);
 	}
+}
+
+void	put_s(va_list *ap, t_flag *flag, int *cnt)
+{
+	char	*t_str;
+	int		len;
+	char	padding;
+
+	t_str = va_arg(*ap, char *);
+	if (!t_str)
+		t_str = "(null)";
+	len = ft_strlen(t_str);
+	if (0 <= flag->precision && flag->precision < len)
+		len = flag->precision;
+	padding = ' ';
+	if (flag->min_width && !flag->left_justified)
+	{
+		if (flag->zero_padding)
+			padding = '0';
+		ft_putpadding(padding, flag->min_width - len, cnt);
+	}
+	ft_putstr_cnt_limit(t_str, len, cnt);
+	if (flag->left_justified)
+		ft_putpadding(padding, flag->min_width - len, cnt);
 }

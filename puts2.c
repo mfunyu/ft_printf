@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:06:46 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:27:43 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:31:48 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,17 @@ void	ft_putchar_cnt(char c, int *cnt)
 
 void	ft_putstr_cnt(char *s, int *cnt)
 {
+	ft_putstr_cnt_limit(s, ft_strlen(s), cnt);
+}
+
+void	ft_putstr_cnt_limit(char *s, int len, int *cnt)
+{
 	if (!s)
 		return ;
-	while (*s)
-		ft_putchar_cnt(*s++, cnt);
+	write(1, s, len);
+	*cnt += len;
 }
+
 
 void	ft_putpadding(char c, int n, int *cnt)
 {

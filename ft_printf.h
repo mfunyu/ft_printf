@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:30:35 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:15:21 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-typedef struct	s_flag
+typedef struct s_flag
 {
 	char		format;
 	int			left_justified;

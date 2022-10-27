@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:47:53 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:25:25 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ unsigned int	get_digits(long long nb, unsigned int base)
 	return (cnt);
 }
 
-char			*ft_utohex(size_t nb, int upper)
+char	*ft_utohex(size_t nb, int upper)
 {
 	size_t		digits;
 	char		*strhex;
@@ -56,7 +56,8 @@ char			*ft_utohex(size_t nb, int upper)
 
 	hex = "0123456789abcdef";
 	digits = get_udigits(nb, 16);
-	if (!(strhex = (char *)malloc((digits + 1) * sizeof(char))))
+	strhex = (char *)malloc((digits + 1) * sizeof(char));
+	if (!strhex)
 		return (NULL);
 	strhex[digits] = '\0';
 	if (nb == 0)
@@ -70,13 +71,14 @@ char			*ft_utohex(size_t nb, int upper)
 	return (strhex);
 }
 
-char			*ft_uitoa(unsigned int n)
+char	*ft_uitoa(unsigned int n)
 {
 	char			*nb;
 	unsigned int	len;
 
 	len = get_digits(n, 10);
-	if (!(nb = (char *)malloc((len + 1) * sizeof(char))))
+	nb = (char *)malloc((len + 1) * sizeof(char));
+	if (!nb)
 		return (NULL);
 	nb[len--] = '\0';
 	while (n > 9)
@@ -89,7 +91,7 @@ char			*ft_uitoa(unsigned int n)
 	return (nb);
 }
 
-int				max(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
 		return (a);

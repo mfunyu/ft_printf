@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2020/07/15 10:26:41 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:21:10 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** that has to be formatted.
 */
 
-void		set_min_width(const char **format, va_list *ap, t_flag *flag)
+void	set_min_width(const char **format, va_list *ap, t_flag *flag)
 {
 	int		width;
 
@@ -59,7 +59,7 @@ void		set_min_width(const char **format, va_list *ap, t_flag *flag)
 ** 0 is assumed.
 */
 
-void		set_precision(const char **format, va_list *ap, t_flag *flag)
+void	set_precision(const char **format, va_list *ap, t_flag *flag)
 {
 	int		prec;
 

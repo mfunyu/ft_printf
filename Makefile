@@ -6,31 +6,43 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 17:46:56 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/10/27 18:15:05 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+NAME	:= libftprintf.a
+CC		:= gcc
+CFLAGS	:= -Wall -Wextra -Werror
 
-NAME := libftprintf.a
-SRCS := ft_printf.c ft_printf_utils.c puts.c puts2.c sets.c sets2.c
-OBJS := $(SRCS:%.c=%.o)
-LIBFT := ./libft
+SRCS	:= ft_printf.c \
+			ft_printf_utils.c \
+			puts.c \
+			puts2.c \
+			sets.c \
+			sets2.c
+OBJS_DIR:= objs/
+OBJS	:= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+LIBFT	:= libft
 
 all : $(NAME) $(LIBFT)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS_DIR) $(OBJS)
 	$(MAKE) -C $(LIBFT)
 	cp $(LIBFT)/libft.a $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
+$(OBJS_DIR)%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OBJS_DIR):
+	@mkdir $@
+
 clean :
-	$(RM) $(OBJS)
+	$(RM) -R $(OBJS_DIR)
 	$(MAKE) clean -C $(LIBFT)
 
-fclean :
-	$(RM) $(NAME) $(OBJS)
+fclean : clean
+	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT)
 
 re : fclean all

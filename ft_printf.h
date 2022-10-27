@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:43:59 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:52:43 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void			set_min_width(const char **str, va_list *ap, t_flag *flag);
 unsigned int	get_digits(long long nb, unsigned int base);
 void			ft_utohex(char *strhex, size_t nb, int upper);
 void			ft_uitoa(char *nb, unsigned int n);
-void			ft_itoa(char *nb, int n);
+void			ft_itoa_stack(char *nb, int n);
 int				max(int a, int b);
 
 #endif

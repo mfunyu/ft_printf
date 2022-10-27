@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:38:51 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:53:06 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,12 @@ int	set_s(va_list *ap, t_flag *flag, int *cnt)
 
 int	set_di(va_list *ap, t_flag *flag, int *cnt)
 {
-	char	*t_str;
-	char	*tmp;
+	char	t_str[100];
 
-	t_str = ft_itoa(va_arg(*ap, int));
-	if (!t_str)
-		return (-1);
+	ft_itoa_stack(t_str, va_arg(*ap, int));
 	if (!flag->precision && t_str[0] == '0')
 	{
-		tmp = t_str;
-		t_str = ft_strdup("");
-		if (!t_str)
-			return (-1);
-		free(tmp);
+		t_str[0] = '\0';
 	}
 	if (flag->precision >= 0)
 	{
@@ -50,7 +43,6 @@ int	set_di(va_list *ap, t_flag *flag, int *cnt)
 			flag->precision++;
 	}
 	ft_putnumstr(t_str, ft_strlen(t_str), flag, cnt);
-	free(t_str);
 	return (0);
 }
 

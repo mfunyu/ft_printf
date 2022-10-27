@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:45:25 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 18:52:38 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_uitoa(char *nb, unsigned int n)
 	nb[len] = n + '0';
 }
 
-void	ft_itoa(char *nb, int n)
+void	ft_itoa_stack(char *nb, int n)
 {
 	int			digit;
 

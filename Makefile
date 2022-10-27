@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 18:20:55 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/10/27 18:47:18 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS	:= ft_printf.c \
 			puts.c \
 			puts2.c \
 			sets.c \
-			sets2.c
+			sets2.c \
+			utils.c
 OBJS_DIR:= objs/
 OBJS	:= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT	:= libft

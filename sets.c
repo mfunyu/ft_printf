@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 18:53:06 by mfunyu           ###   ########.fr       */
+/*   Updated: 2022/10/27 20:03:09 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 int	set_s(va_list *ap, t_flag *flag, int *cnt)
 {
 	char	*t_str;
+	char	str[INT_MAX / 526];
 
 	t_str = va_arg(*ap, char *);
 	if (!t_str)
+	{
 		t_str = "(null)";
+	}
 	if (0 <= flag->precision && flag->precision < (int)ft_strlen(t_str))
 	{
-		t_str[flag->precision] = '\0';
+		ft_strlcpy(str, t_str, flag->precision + 1);
 	}
-	ft_putstr(t_str, ft_strlen(t_str), flag, cnt);
+	else
+	{
+		ft_strlcpy(str, t_str, ft_strlen(t_str) + 1);
+	}
+	ft_putstr(str, ft_strlen(str), flag, cnt);
 	return (0);
 }
 

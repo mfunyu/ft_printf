@@ -6,13 +6,13 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 19:30:45 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/10/27 21:32:39 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= libftprintf.a
 CC		:= gcc
-CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
 
 SRCS	:= ft_printf.c \
 			ft_printf_utils.c \
@@ -24,6 +24,7 @@ SRCS	:= ft_printf.c \
 OBJS_DIR:= objs/
 OBJS	:= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT	:= libft
+INCLUDES:= -I $(LIBFT)
 
 .PHONY : all
 all : $(NAME) $(LIBFT)

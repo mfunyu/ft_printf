@@ -6,13 +6,13 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/10/27 21:32:39 by mfunyu           ###   ########.fr        #
+#    Updated: 2022/12/04 00:23:31 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= libftprintf.a
 CC		:= gcc
-CFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS	= -Wall -Wextra -Werror 
 
 SRCS	:= ft_printf.c \
 			ft_printf_utils.c \
@@ -35,7 +35,7 @@ $(NAME) : $(OBJS_DIR) $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 $(OBJS_DIR)%.o: %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 $(OBJS_DIR):
 	@mkdir $@

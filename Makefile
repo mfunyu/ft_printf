@@ -6,7 +6,7 @@
 #    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2022/12/04 00:23:31 by mfunyu           ###   ########.fr        #
+#    Updated: 2023/01/29 12:48:24 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,15 @@ CC		:= gcc
 CFLAGS	= -Wall -Wextra -Werror 
 
 SRCS	:= ft_printf.c \
-			ft_printf_utils.c \
+			num_converters.c \
 			puts.c \
-			puts2.c \
-			sets.c \
-			sets2.c \
-			utils.c
+			puts_helpers.c \
+			set_formats.c \
+			set_flags.c
 OBJS_DIR:= objs/
 OBJS	:= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 LIBFT	:= libft
-INCLUDES:= -I $(LIBFT)
+INCLUDES:= -I $(LIBFT) -I includes
 
 .PHONY : all
 all : $(NAME) $(LIBFT)

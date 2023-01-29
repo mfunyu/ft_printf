@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sets.c                                             :+:      :+:    :+:   */
+/*   set_formats.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 20:42:27 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/01/29 12:49:12 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdarg.h>
+#include <stddef.h>
+#include "flag.h"
+#include "num_converters.h"
+#include "puts.h"
+#include "libft.h"
 
 int	set_di(va_list *ap, t_flag *flag, int *cnt)
 {

@@ -6,11 +6,14 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 11:19:36 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 20:45:34 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/01/29 12:48:45 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdarg.h>
+#include "flag.h"
+#include "puts_helpers.h"
+#include "libft.h"
 
 /*
 ** expected output

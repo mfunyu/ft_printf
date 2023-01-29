@@ -6,11 +6,16 @@
 /*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2022/10/27 20:45:11 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/01/29 12:55:22 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdarg.h>
+#include "flag.h"
+#include "sets.h"
+#include "puts.h"
+#include "puts_helpers.h"
+#include "libft.h"
 
 static void	init_struct(t_flag *flag)
 {

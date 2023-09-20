@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+         #
+#    By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/06 21:24:20 by mfunyu            #+#    #+#              #
-#    Updated: 2023/01/29 13:05:28 by mfunyu           ###   ########.fr        #
+#    Updated: 2023/09/20 14:52:15 by mfunyu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ NAME	:= libftprintf.a
 CC		:= gcc
 CFLAGS	= -Wall -Wextra -Werror
 OBJS	:= $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
-INCLUDES:= -I $(LIBFT) -I includes
+INCLUDES:= -I $(LIBFT) -I includes -I .
 
 # ---------------------------------------------------------------------------- #
 #                                  BASIC RULES                                 #

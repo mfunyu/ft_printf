@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   puts_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 10:06:46 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/01/29 12:50:09 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/09/20 14:51:44 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
+#include "ft_printf.h"
 
 void	ft_putchar_cnt(char c, int *cnt)
 {
-	write(1, &c, 1);
+	write(FILENO, &c, 1);
 	(*cnt)++;
 }
 
@@ -23,7 +24,7 @@ void	ft_putstr_cnt_limit(char *s, int len, int *cnt)
 {
 	if (!s)
 		return ;
-	write(1, s, len);
+	write(FILENO, s, len);
 	*cnt += len;
 }
 

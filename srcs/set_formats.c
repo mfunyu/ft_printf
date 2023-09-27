@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_formats.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 22:59:01 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/01/29 12:49:12 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/09/27 14:51:16 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,26 @@ int	set_u(va_list *ap, t_flag *flag, int *cnt)
 	char			t_str[100];
 
 	t_uint = va_arg(*ap, unsigned int);
-	ft_uitoa(t_str, t_uint);
+	ft_zuitoa(t_str, t_uint);
+	if (!flag->precision && t_str[0] == '0')
+	{
+		t_str[0] = '\0';
+	}
+	if (flag->precision >= 0)
+	{
+		flag->zero_padding = 0;
+	}
+	ft_putnumstr(t_str, ft_strlen(t_str), flag, cnt);
+	return (0);
+}
+
+int	set_zu(va_list *ap, t_flag *flag, int *cnt)
+{
+	size_t	t_zuint;
+	char			t_str[100];
+
+	t_zuint = va_arg(*ap, size_t);
+	ft_zuitoa(t_str, t_zuint);
 	if (!flag->precision && t_str[0] == '0')
 	{
 		t_str[0] = '\0';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   num_converters.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/01/29 12:57:51 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/09/27 14:51:34 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	ft_utohex(char *strhex, size_t nb, int upper)
 	}
 }
 
-void	ft_uitoa(char *nb, unsigned int n)
+void	ft_zuitoa(char *nb, size_t n)
 {
-	unsigned int	len;
+	size_t	len;
 
 	len = get_digits(n, 10);
 	nb[len--] = '\0';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfunyu <mfunyu@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/01/29 12:55:22 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/09/27 14:57:39 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,33 @@ static void	init_struct(t_flag *flag)
 ** % A % followed by another % character will write a single % to the stream.
 */
 
-static int	parse_format_str(const char *format, va_list *ap, \
+static int	parse_format_str(const char **format, va_list *ap, \
 										t_flag *flag, int *cnt)
 {
 	int		error;
 
 	error = 0;
-	flag->format = *format;
-	if (*format == 'c')
+	flag->format = **format;
+	if (**format == 'c')
 		put_c(ap, flag, cnt);
-	else if (*format == 's')
+	else if (**format == 's')
 		put_s(ap, flag, cnt);
-	else if (*format == 'd' || *format == 'i')
+	else if (**format == 'd' || **format == 'i')
 		error = set_di(ap, flag, cnt);
-	else if (*format == 'u')
+	else if (**format == 'u')
 		error = set_u(ap, flag, cnt);
-	else if (*format == 'p' || *format == 'x' || *format == 'X')
+	else if (!ft_strncmp(*format, "zu", 2))
+	{
+		error = set_zu(ap, flag, cnt);
+		(*format)++;
+	}
+	else if (**format == 'p' || **format == 'x' || **format == 'X')
 		error = set_hex(ap, flag, cnt);
-	else if (*format == '%')
+	else if (**format == '%')
 		ft_putchar_cnt('%', cnt);
 	else
 		return (-1);
+	(*format)++;
 	return (error);
 }
 
@@ -80,26 +86,18 @@ static int	parse_format_specifiers(const char **format, \
 	while (*format && (ft_strchr("-0.*", **format) || ft_isdigit(**format)))
 	{
 		if (**format == '-')
-		{
 			flag->left_justified = 1;
-		}
 		else if (**format == '0')
-		{
 			flag->zero_padding = 1;
-		}
 		else if (ft_isdigit(**format) || **format == '*')
-		{
 			set_min_width(format, ap, flag);
-		}
 		else if (**format == '.')
-		{
 			set_precision(format, ap, flag);
-		}
 		(*format)++;
 	}
 	if (flag->left_justified)
 		flag->zero_padding = 0;
-	if (!format || parse_format_str((*format)++, ap, flag, cnt))
+	if (!format || parse_format_str(format, ap, flag, cnt))
 		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 21:23:13 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/09/27 14:51:34 by mfunyu           ###   ########.fr       */
+/*   Updated: 2023/12/01 13:42:38 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ unsigned int	get_digits(long long nb, unsigned int base)
 	return (cnt);
 }
 
+unsigned int	get_unsigned_digits(size_t nb, unsigned int base)
+{
+	size_t	cnt;
+	size_t	n;
+
+	cnt = 1;
+	n = nb;
+	while (n >= base)
+	{
+		n /= base;
+		cnt++;
+	}
+	return (cnt);
+}
+
 void	ft_utohex(char *strhex, size_t nb, int upper)
 {
 	size_t		digits;
@@ -75,7 +90,7 @@ void	ft_zuitoa(char *nb, size_t n)
 {
 	size_t	len;
 
-	len = get_digits(n, 10);
+	len = get_unsigned_digits(n, 10);
 	nb[len--] = '\0';
 	while (n > 9)
 	{

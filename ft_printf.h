@@ -6,7 +6,7 @@
 /*   By: mfunyu <mfunyu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 10:45:21 by mfunyu            #+#    #+#             */
-/*   Updated: 2023/10/02 17:27:26 by mfunyu           ###   ########.fr       */
+/*   Updated: 2024/01/17 13:39:09 by mfunyu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <unistd.h>
 
-# ifdef DEBUG
-#  define FILENO STDERR_FILENO
+# ifdef FD 
+#  define FILENO FD
 # else
 #  define FILENO STDOUT_FILENO
 # endif
